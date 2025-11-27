@@ -16,7 +16,7 @@ export const Hero = () => {
   }, []);
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-hero pt-16 pb-12">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-hero pt-20 md:pt-24 pb-16 md:pb-20">
       {/* Animated background elements with parallax */}
       <div className="absolute inset-0 opacity-10">
         <div 
@@ -29,10 +29,10 @@ export const Hero = () => {
         />
       </div>
 
-      <div className="container relative z-10 px-4 sm:px-6 lg:px-8 py-12 md:py-0">
-        <div className="max-w-5xl mx-auto text-center space-y-8 md:space-y-12">
+      <div className="container relative z-10 px-4 sm:px-6 lg:px-8 py-8 md:py-12">
+        <div className="max-w-5xl mx-auto text-center space-y-6 sm:space-y-8 md:space-y-10">
           {/* Badge */}
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-tech border border-border backdrop-blur-sm animate-fade-in" style={{ animationDelay: '0.1s' }}>
+          <div className="inline-flex items-center gap-2 px-4 py-2.5 rounded-full bg-gradient-tech border border-border backdrop-blur-sm animate-fade-in" style={{ animationDelay: '0.1s' }}>
             <div className="w-2 h-2 rounded-full bg-foreground animate-pulse" />
             <DecodeText 
               text="Österreichs Premium PC-Service" 
@@ -67,7 +67,7 @@ export const Hero = () => {
           </div>
 
           {/* Stats */}
-          <div className="grid grid-cols-3 gap-4 sm:gap-8 pt-12 max-w-3xl mx-auto animate-fade-in px-4" style={{ animationDelay: '0.9s' }}>
+          <div className="grid grid-cols-3 gap-4 sm:gap-8 pt-8 md:pt-12 max-w-3xl mx-auto animate-fade-in px-4" style={{ animationDelay: '0.9s' }}>
             <div className="space-y-2 p-4 rounded-lg hover:bg-card/50 transition-all duration-300 cursor-pointer group">
               <div className="text-2xl sm:text-3xl md:text-4xl font-tech font-bold text-foreground group-hover:scale-110 transition-transform">500+</div>
               <div className="text-xs sm:text-sm text-muted-foreground">Zufriedene Kunden</div>

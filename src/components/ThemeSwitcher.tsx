@@ -23,13 +23,13 @@ export const ThemeSwitcher = () => {
       setIsXRayActive(true);
       document.documentElement.classList.add('cyberpunk-xray');
       
-      // After 1.5s, remove effect and apply theme
+      // After 0.8s, remove effect and apply theme
       setTimeout(() => {
         setIsXRayActive(false);
         document.documentElement.classList.remove('cyberpunk-xray');
         setTheme(themeId);
         playPowerUpSound();
-      }, 1500);
+      }, 800);
     } else {
       setTheme(themeId);
     }
