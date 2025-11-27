@@ -1,4 +1,4 @@
-import { Monitor } from "lucide-react";
+import logo from "@/assets/logo-pc-praxis.jpg";
 
 export const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -9,13 +9,12 @@ export const Footer = () => {
         <div className="grid md:grid-cols-4 gap-8 mb-8">
           {/* Brand */}
           <div className="space-y-4">
-            <div className="flex items-center gap-2">
-              <div className="w-10 h-10 rounded-lg bg-primary/10 border border-primary/20 flex items-center justify-center">
-                <Monitor className="w-5 h-5 text-primary" />
-              </div>
-              <span className="font-tech text-xl font-bold">
-                PC <span className="text-primary">Praxis</span>
-              </span>
+            <div className="flex items-center gap-3">
+              <img 
+                src={logo} 
+                alt="PC Praxis Logo" 
+                className="h-10 w-auto object-contain brightness-0 invert"
+              />
             </div>
             <p className="text-sm text-muted-foreground">
               Ihr Experte für maßgeschneiderte PC-Systeme und professionellen IT-Service in Österreich.

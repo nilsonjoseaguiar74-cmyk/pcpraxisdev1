@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Menu, X, Monitor } from "lucide-react";
+import { Menu, X } from "lucide-react";
+import logo from "@/assets/logo-pc-praxis.jpg";
 
 export const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -16,13 +17,12 @@ export const Navbar = () => {
       <div className="container px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <a href="#" className="flex items-center gap-2 group">
-            <div className="w-10 h-10 rounded-lg bg-primary/10 border border-primary/20 flex items-center justify-center group-hover:shadow-glow transition-all">
-              <Monitor className="w-5 h-5 text-primary" />
-            </div>
-            <span className="font-tech text-xl font-bold">
-              PC <span className="text-primary">Praxis</span>
-            </span>
+          <a href="#" className="flex items-center gap-3 group">
+            <img 
+              src={logo} 
+              alt="PC Praxis Logo" 
+              className="h-10 w-auto object-contain brightness-0 invert group-hover:brightness-100 group-hover:invert-0 transition-all duration-300"
+            />
           </a>
 
           {/* Desktop menu */}
