@@ -15,66 +15,66 @@ export const Hero = () => {
   }, []);
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-hero">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-hero pt-16">
       {/* Animated background elements with parallax */}
       <div className="absolute inset-0 opacity-10">
         <div 
-          className="absolute top-1/4 left-1/4 w-96 h-96 bg-foreground/30 rounded-full blur-3xl animate-glow-pulse transition-transform duration-100 ease-out" 
+          className="absolute top-1/4 left-1/4 w-72 h-72 md:w-96 md:h-96 bg-foreground/30 rounded-full blur-3xl animate-glow-pulse transition-transform duration-100 ease-out" 
           style={{ transform: `translate(${scrollY * 0.3}px, ${scrollY * 0.2}px)` }}
         />
         <div 
-          className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-accent/30 rounded-full blur-3xl animate-glow-pulse transition-transform duration-100 ease-out" 
+          className="absolute bottom-1/4 right-1/4 w-72 h-72 md:w-96 md:h-96 bg-accent/30 rounded-full blur-3xl animate-glow-pulse transition-transform duration-100 ease-out" 
           style={{ animationDelay: '1.5s', transform: `translate(-${scrollY * 0.4}px, ${scrollY * 0.15}px)` }}
         />
       </div>
 
-      <div className="container relative z-10 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-4xl mx-auto text-center space-y-8">
+      <div className="container relative z-10 px-4 sm:px-6 lg:px-8 py-20 md:py-0">
+        <div className="max-w-5xl mx-auto text-center space-y-8 md:space-y-12">
           {/* Badge */}
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-tech border border-border backdrop-blur-sm animate-fade-in" style={{ animationDelay: '0.1s' }}>
             <div className="w-2 h-2 rounded-full bg-foreground animate-pulse" />
-            <span className="text-sm font-medium text-foreground">Österreichs Premium PC-Service</span>
+            <span className="text-xs sm:text-sm font-medium text-foreground">Österreichs Premium PC-Service</span>
           </div>
 
           {/* Main heading */}
-          <h1 className="text-5xl sm:text-6xl lg:text-7xl font-tech font-bold tracking-tight animate-fade-in" style={{ animationDelay: '0.3s' }}>
-            <span className="block text-foreground">Maßgeschneiderte</span>
+          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-tech font-bold tracking-tight animate-fade-in leading-tight" style={{ animationDelay: '0.3s' }}>
+            <span className="block text-foreground mb-2">Maßgeschneiderte</span>
             <span className="block bg-gradient-to-r from-foreground via-muted-foreground to-foreground bg-clip-text text-transparent">
               PC-Lösungen
             </span>
           </h1>
 
           {/* Description */}
-          <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed animate-fade-in" style={{ animationDelay: '0.5s' }}>
+          <p className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed px-4 animate-fade-in" style={{ animationDelay: '0.5s' }}>
             Vom individuellen Gaming-PC bis zur professionellen Workstation – 
             wir bieten erstklassige Hardware, kompetente Beratung und zuverlässigen Service.
           </p>
 
           {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-4 animate-fade-in" style={{ animationDelay: '0.7s' }}>
-            <Button variant="hero" size="xl" className="group">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-4 px-4 animate-fade-in" style={{ animationDelay: '0.7s' }}>
+            <Button variant="hero" size="xl" className="group w-full sm:w-auto">
               <Monitor className="w-5 h-5 group-hover:scale-110 transition-transform" />
               PC Konfigurieren
             </Button>
-            <Button variant="tech" size="xl" className="group">
+            <Button variant="tech" size="xl" className="group w-full sm:w-auto">
               <Wrench className="w-5 h-5 group-hover:rotate-12 transition-transform" />
               Services entdecken
             </Button>
           </div>
 
           {/* Stats */}
-          <div className="grid grid-cols-3 gap-8 pt-12 max-w-2xl mx-auto animate-fade-in" style={{ animationDelay: '0.9s' }}>
-            <div className="space-y-2">
-              <div className="text-3xl font-tech font-bold text-foreground">500+</div>
-              <div className="text-sm text-muted-foreground">Zufriedene Kunden</div>
+          <div className="grid grid-cols-3 gap-4 sm:gap-8 pt-12 max-w-3xl mx-auto animate-fade-in px-4" style={{ animationDelay: '0.9s' }}>
+            <div className="space-y-2 p-4 rounded-lg hover:bg-card/50 transition-all duration-300 cursor-pointer group">
+              <div className="text-2xl sm:text-3xl md:text-4xl font-tech font-bold text-foreground group-hover:scale-110 transition-transform">500+</div>
+              <div className="text-xs sm:text-sm text-muted-foreground">Zufriedene Kunden</div>
             </div>
-            <div className="space-y-2">
-              <div className="text-3xl font-tech font-bold text-foreground">100%</div>
-              <div className="text-sm text-muted-foreground">Qualitätsgarantie</div>
+            <div className="space-y-2 p-4 rounded-lg hover:bg-card/50 transition-all duration-300 cursor-pointer group">
+              <div className="text-2xl sm:text-3xl md:text-4xl font-tech font-bold text-foreground group-hover:scale-110 transition-transform">100%</div>
+              <div className="text-xs sm:text-sm text-muted-foreground">Qualitätsgarantie</div>
             </div>
-            <div className="space-y-2">
-              <div className="text-3xl font-tech font-bold text-foreground">24/7</div>
-              <div className="text-sm text-muted-foreground">Support</div>
+            <div className="space-y-2 p-4 rounded-lg hover:bg-card/50 transition-all duration-300 cursor-pointer group">
+              <div className="text-2xl sm:text-3xl md:text-4xl font-tech font-bold text-foreground group-hover:scale-110 transition-transform">24/7</div>
+              <div className="text-xs sm:text-sm text-muted-foreground">Support</div>
             </div>
           </div>
         </div>
