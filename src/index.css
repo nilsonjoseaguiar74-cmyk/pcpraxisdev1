@@ -208,16 +208,19 @@ All colors MUST be HSL.
   
   /* Logo theming */
   .logo-themed {
-    filter: brightness(0) invert(1);
     transition: filter 0.3s ease;
   }
   
+  .theme-black .logo-themed {
+    filter: brightness(1.1);
+  }
+  
   .theme-white .logo-themed {
-    filter: brightness(0) invert(0);
+    filter: invert(1);
   }
   
   .theme-cyberpunk .logo-themed {
-    filter: brightness(0) saturate(100%) invert(90%) sepia(100%) hue-rotate(300deg);
+    filter: hue-rotate(300deg) saturate(1.5) brightness(1.1);
   }
   
   @keyframes glow-pulse {
