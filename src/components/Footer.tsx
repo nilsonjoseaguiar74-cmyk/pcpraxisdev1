@@ -5,11 +5,11 @@ export const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="border-t border-border bg-card/30">
-      <div className="container px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid md:grid-cols-4 gap-8 mb-8">
+    <footer className="border-t border-border bg-card/30 backdrop-blur-sm">
+      <div className="container px-4 sm:px-6 lg:px-8 py-12 md:py-16">
+        <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-8 md:gap-10 mb-8 md:mb-12">
           {/* Brand */}
-          <div className="space-y-4">
+          <div className="space-y-4 sm:col-span-2 md:col-span-1">
             <div className="flex items-center gap-3">
               <img 
                 src={theme === 'white' 
@@ -17,56 +17,56 @@ export const Footer = () => {
                   : "/lovable-uploads/logo-pc-praxis-light.png"
                 }
                 alt="PC Praxis Logo" 
-                className="h-10 w-auto object-contain"
+                className="h-10 w-auto object-contain transition-transform hover:scale-105"
               />
             </div>
-            <p className="text-sm text-muted-foreground">
+            <p className="text-sm text-muted-foreground leading-relaxed max-w-xs">
               Ihr Experte für maßgeschneiderte PC-Systeme und professionellen IT-Service in Österreich.
             </p>
           </div>
 
           {/* Services */}
           <div>
-            <h3 className="font-tech font-semibold mb-4">Services</h3>
-            <ul className="space-y-2 text-sm text-muted-foreground">
-              <li><a href="#configurator" className="hover:text-primary transition-colors">PC Konfigurator</a></li>
-              <li><a href="#services" className="hover:text-primary transition-colors">Hardware Shop</a></li>
-              <li><a href="#services" className="hover:text-primary transition-colors">Wartung & Reparatur</a></li>
-              <li><a href="#services" className="hover:text-primary transition-colors">Upgrades</a></li>
+            <h3 className="font-tech font-semibold mb-3 md:mb-4 text-sm md:text-base">Services</h3>
+            <ul className="space-y-2 md:space-y-2.5 text-sm text-muted-foreground">
+              <li><a href="#configurator" className="hover:text-primary transition-colors inline-block hover:translate-x-1 transition-transform">PC Konfigurator</a></li>
+              <li><a href="#services" className="hover:text-primary transition-colors inline-block hover:translate-x-1 transition-transform">Hardware Shop</a></li>
+              <li><a href="#services" className="hover:text-primary transition-colors inline-block hover:translate-x-1 transition-transform">Wartung & Reparatur</a></li>
+              <li><a href="#services" className="hover:text-primary transition-colors inline-block hover:translate-x-1 transition-transform">Upgrades</a></li>
             </ul>
           </div>
 
           {/* Company */}
           <div>
-            <h3 className="font-tech font-semibold mb-4">Unternehmen</h3>
-            <ul className="space-y-2 text-sm text-muted-foreground">
-              <li><a href="#" className="hover:text-primary transition-colors">Über uns</a></li>
-              <li><a href="#contact" className="hover:text-primary transition-colors">Kontakt</a></li>
-              <li><a href="#" className="hover:text-primary transition-colors">AGB</a></li>
-              <li><a href="#" className="hover:text-primary transition-colors">Impressum</a></li>
+            <h3 className="font-tech font-semibold mb-3 md:mb-4 text-sm md:text-base">Unternehmen</h3>
+            <ul className="space-y-2 md:space-y-2.5 text-sm text-muted-foreground">
+              <li><a href="#" className="hover:text-primary transition-colors inline-block hover:translate-x-1 transition-transform">Über uns</a></li>
+              <li><a href="#contact" className="hover:text-primary transition-colors inline-block hover:translate-x-1 transition-transform">Kontakt</a></li>
+              <li><a href="#" className="hover:text-primary transition-colors inline-block hover:translate-x-1 transition-transform">AGB</a></li>
+              <li><a href="#" className="hover:text-primary transition-colors inline-block hover:translate-x-1 transition-transform">Impressum</a></li>
             </ul>
           </div>
 
           {/* Legal */}
           <div>
-            <h3 className="font-tech font-semibold mb-4">Rechtliches</h3>
-            <ul className="space-y-2 text-sm text-muted-foreground">
-              <li><a href="#" className="hover:text-primary transition-colors">Datenschutz</a></li>
-              <li><a href="#" className="hover:text-primary transition-colors">Cookie-Richtlinie</a></li>
-              <li><a href="#" className="hover:text-primary transition-colors">GDPR</a></li>
-              <li><a href="#" className="hover:text-primary transition-colors">Widerrufsrecht</a></li>
+            <h3 className="font-tech font-semibold mb-3 md:mb-4 text-sm md:text-base">Rechtliches</h3>
+            <ul className="space-y-2 md:space-y-2.5 text-sm text-muted-foreground">
+              <li><a href="#" className="hover:text-primary transition-colors inline-block hover:translate-x-1 transition-transform">Datenschutz</a></li>
+              <li><a href="#" className="hover:text-primary transition-colors inline-block hover:translate-x-1 transition-transform">Cookie-Richtlinie</a></li>
+              <li><a href="#" className="hover:text-primary transition-colors inline-block hover:translate-x-1 transition-transform">GDPR</a></li>
+              <li><a href="#" className="hover:text-primary transition-colors inline-block hover:translate-x-1 transition-transform">Widerrufsrecht</a></li>
             </ul>
           </div>
         </div>
 
         {/* Bottom bar */}
-        <div className="pt-8 border-t border-border flex flex-col sm:flex-row justify-between items-center gap-4">
-          <p className="text-sm text-muted-foreground">
+        <div className="pt-8 border-t border-border flex flex-col sm:flex-row justify-between items-center gap-4 text-center sm:text-left">
+          <p className="text-xs md:text-sm text-muted-foreground">
             © {currentYear} PC Praxis - Pedro Hauser. Alle Rechte vorbehalten.
           </p>
-          <div className="flex items-center gap-2 text-sm text-muted-foreground">
+          <div className="flex items-center gap-2 text-xs md:text-sm text-muted-foreground">
             <span>Made with</span>
-            <span className="text-primary">❤️</span>
+            <span className="text-primary animate-pulse">❤️</span>
             <span>in Austria 🇦🇹</span>
           </div>
         </div>
