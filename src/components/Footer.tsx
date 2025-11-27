@@ -1,4 +1,7 @@
+import { useTheme } from "@/contexts/ThemeContext";
+
 export const Footer = () => {
+  const { theme } = useTheme();
   const currentYear = new Date().getFullYear();
 
   return (
@@ -9,9 +12,12 @@ export const Footer = () => {
           <div className="space-y-4">
             <div className="flex items-center gap-3">
               <img 
-                src="/lovable-uploads/logo-pc-praxis-novo.svg" 
+                src={theme === 'white' 
+                  ? "/lovable-uploads/logo-pc-praxis-dark.png" 
+                  : "/lovable-uploads/logo-pc-praxis-light.png"
+                }
                 alt="PC Praxis Logo" 
-                className="h-10 w-auto object-contain logo-themed"
+                className="h-10 w-auto object-contain"
               />
             </div>
             <p className="text-sm text-muted-foreground">
