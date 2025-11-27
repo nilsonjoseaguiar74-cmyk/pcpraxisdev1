@@ -2,8 +2,10 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 import { ThemeSwitcher } from "./ThemeSwitcher";
-import logo from "@/assets/logo-pc-praxis.jpg";
+import { useTheme } from "@/contexts/ThemeContext";
+
 export const Navbar = () => {
+  const { theme } = useTheme();
   const [isOpen, setIsOpen] = useState(false);
   const menuItems = [{
     label: "Services",
@@ -22,8 +24,11 @@ export const Navbar = () => {
           <a href="#" className="flex items-center gap-3 group">
             <img 
               alt="PC Praxis Logo" 
-              className="h-10 w-auto object-contain logo-themed transition-all duration-300" 
-              src="/lovable-uploads/logo-pc-praxis-novo.svg"
+              className="h-10 w-auto object-contain transition-all duration-300" 
+              src={theme === 'white' 
+                ? "/lovable-uploads/logo-pc-praxis-dark.png" 
+                : "/lovable-uploads/logo-pc-praxis-light.png"
+              }
             />
           </a>
 

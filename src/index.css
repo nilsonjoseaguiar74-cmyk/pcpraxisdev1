@@ -206,23 +206,6 @@ All colors MUST be HSL.
     transition: background-color 0.3s ease, color 0.3s ease;
   }
   
-  /* Logo theming */
-  .logo-themed {
-    transition: filter 0.3s ease;
-  }
-  
-  .theme-black .logo-themed {
-    filter: brightness(1.1);
-  }
-  
-  .theme-white .logo-themed {
-    filter: invert(1);
-  }
-  
-  .theme-cyberpunk .logo-themed {
-    filter: hue-rotate(300deg) saturate(1.5) brightness(1.1);
-  }
-  
   @keyframes glow-pulse {
     0%, 100% { opacity: 0.5; }
     50% { opacity: 1; }
