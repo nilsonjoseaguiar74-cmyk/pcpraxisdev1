@@ -20,7 +20,11 @@ export const Navbar = () => {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <a href="#" className="flex items-center gap-3 group">
-            <img alt="PC Praxis Logo" className="h-10 w-auto object-contain brightness-0 invert group-hover:brightness-100 group-hover:invert-0 transition-all duration-300" src="/lovable-uploads/2db4205c-f657-4424-9c96-e8148555b025.svg" />
+            <img 
+              alt="PC Praxis Logo" 
+              className="h-10 w-auto object-contain logo-themed transition-all duration-300" 
+              src="/lovable-uploads/2db4205c-f657-4424-9c96-e8148555b025.svg" 
+            />
           </a>
 
           {/* Desktop menu */}
