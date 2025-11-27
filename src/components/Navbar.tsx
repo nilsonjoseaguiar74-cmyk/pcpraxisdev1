@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 import { ThemeSwitcher } from "./ThemeSwitcher";
+import { LanguageSwitcher } from "./LanguageSwitcher";
 import { useTheme } from "@/contexts/ThemeContext";
 
 export const Navbar = () => {
@@ -24,7 +25,7 @@ export const Navbar = () => {
           <a href="#" className="flex items-center gap-3 group transition-transform hover:scale-105">
             <img 
               alt="PC Praxis Logo" 
-              className="h-8 md:h-10 w-auto object-contain transition-all duration-300" 
+              className="h-10 md:h-14 w-auto object-contain transition-all duration-300" 
               src={theme === 'white' 
                 ? "/lovable-uploads/logo-pc-praxis-dark.png" 
                 : "/lovable-uploads/logo-pc-praxis-light.png"
@@ -37,6 +38,7 @@ export const Navbar = () => {
             {menuItems.map(item => <a key={item.label} href={item.href} className="text-sm font-medium text-muted-foreground hover:text-primary transition-all hover:scale-105">
                 {item.label}
               </a>)}
+            <LanguageSwitcher />
             <ThemeSwitcher />
             <Button variant="hero" size="sm" className="hover:scale-105 transition-transform">
               PC konfigurieren
@@ -54,7 +56,8 @@ export const Navbar = () => {
             {menuItems.map(item => <a key={item.label} href={item.href} onClick={() => setIsOpen(false)} className="block text-sm font-medium text-muted-foreground hover:text-primary transition-colors py-2">
                 {item.label}
               </a>)}
-            <div className="flex items-center justify-center pt-2">
+            <div className="flex items-center justify-center gap-4 pt-2">
+              <LanguageSwitcher />
               <ThemeSwitcher />
             </div>
             <Button variant="hero" size="sm" className="w-full">
