@@ -147,6 +147,7 @@ All colors MUST be HSL.
 @layer base {
   * {
     @apply border-border;
+    transition: border-color 0.3s ease;
   }
 
   body {
@@ -154,6 +155,25 @@ All colors MUST be HSL.
     font-feature-settings: "kern" 1;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+  }
+  
+  /* Smooth theme transitions */
+  html {
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  
+  /* Logo theming */
+  .logo-themed {
+    filter: brightness(0) invert(1);
+    transition: filter 0.3s ease;
+  }
+  
+  .theme-white .logo-themed {
+    filter: brightness(0) invert(0);
+  }
+  
+  .theme-cyberpunk .logo-themed {
+    filter: brightness(0) saturate(100%) invert(90%) sepia(100%) hue-rotate(300deg);
   }
   
   @keyframes glow-pulse {

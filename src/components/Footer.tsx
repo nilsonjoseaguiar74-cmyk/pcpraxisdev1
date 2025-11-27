@@ -11,7 +11,7 @@ export const Footer = () => {
               <img 
                 src="/lovable-uploads/2db4205c-f657-4424-9c96-e8148555b025.svg" 
                 alt="PC Praxis Logo" 
-                className="h-10 w-auto object-contain brightness-0 invert"
+                className="h-10 w-auto object-contain logo-themed"
               />
             </div>
             <p className="text-sm text-muted-foreground">
