@@ -60,14 +60,32 @@ export const Footer = () => {
         </div>
 
         {/* Bottom bar */}
-        <div className="pt-8 border-t border-border flex flex-col sm:flex-row justify-between items-center gap-4 text-center sm:text-left">
-          <p className="text-xs md:text-sm text-muted-foreground">
-            © {currentYear} PC Praxis - Pedro Hauser. Alle Rechte vorbehalten.
-          </p>
-          <div className="flex items-center gap-2 text-xs md:text-sm text-muted-foreground">
-            <span>Made with</span>
-            <span className="text-primary animate-pulse">❤️</span>
-            <span>in Austria 🇦🇹</span>
+        <div className="pt-8 border-t border-border space-y-4">
+          {/* Crypto payment info */}
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pb-4">
+            <span className="text-xs md:text-sm text-muted-foreground">Aceitamos pagamentos em:</span>
+            <div className="flex items-center gap-3 flex-wrap justify-center">
+              <div className="px-3 py-1.5 rounded-full bg-card border border-border hover:border-primary/30 transition-all cursor-pointer group">
+                <span className="text-xs font-medium group-hover:text-primary transition-colors">₿ Bitcoin</span>
+              </div>
+              <div className="px-3 py-1.5 rounded-full bg-card border border-border hover:border-primary/30 transition-all cursor-pointer group">
+                <span className="text-xs font-medium group-hover:text-primary transition-colors">Ξ Ethereum</span>
+              </div>
+              <div className="px-3 py-1.5 rounded-full bg-card border border-border hover:border-primary/30 transition-all cursor-pointer group">
+                <span className="text-xs font-medium group-hover:text-primary transition-colors">₮ USDT</span>
+              </div>
+            </div>
+          </div>
+          
+          <div className="flex flex-col sm:flex-row justify-between items-center gap-4 text-center sm:text-left">
+            <p className="text-xs md:text-sm text-muted-foreground">
+              © {currentYear} PC Praxis - Pedro Hauser. Alle Rechte vorbehalten.
+            </p>
+            <div className="flex items-center gap-2 text-xs md:text-sm text-muted-foreground">
+              <span>Made with</span>
+              <span className="text-primary animate-pulse">❤️</span>
+              <span>in Austria 🇦🇹</span>
+            </div>
           </div>
         </div>
       </div>

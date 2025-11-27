@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Monitor, Cpu, Wrench } from "lucide-react";
 import { useEffect, useState } from "react";
+import { DecodeText } from "./DecodeText";
 
 export const Hero = () => {
   const [scrollY, setScrollY] = useState(0);
@@ -33,7 +34,10 @@ export const Hero = () => {
           {/* Badge */}
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-tech border border-border backdrop-blur-sm animate-fade-in" style={{ animationDelay: '0.1s' }}>
             <div className="w-2 h-2 rounded-full bg-foreground animate-pulse" />
-            <span className="text-xs sm:text-sm font-medium text-foreground">Österreichs Premium PC-Service</span>
+            <DecodeText 
+              text="Österreichs Premium PC-Service" 
+              className="text-xs sm:text-sm font-medium text-foreground"
+            />
           </div>
 
           {/* Main heading */}

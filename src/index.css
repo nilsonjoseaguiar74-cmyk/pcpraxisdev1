@@ -144,45 +144,45 @@ All colors MUST be HSL.
 
   /* Cyberpunk Theme */
   .theme-cyberpunk {
-    --background: 280 100% 4%;
-    --foreground: 330 100% 98%;
+    --background: 220 30% 8%;
+    --foreground: 270 100% 95%;
 
-    --card: 280 80% 8%;
-    --card-foreground: 330 100% 98%;
+    --card: 220 35% 12%;
+    --card-foreground: 270 100% 95%;
 
-    --popover: 280 70% 10%;
-    --popover-foreground: 330 100% 98%;
+    --popover: 220 40% 14%;
+    --popover-foreground: 270 100% 95%;
 
-    --primary: 330 100% 55%;
-    --primary-foreground: 280 100% 5%;
+    --primary: 270 100% 65%;
+    --primary-foreground: 220 30% 8%;
 
-    --secondary: 190 100% 50%;
-    --secondary-foreground: 280 100% 5%;
+    --secondary: 220 90% 55%;
+    --secondary-foreground: 220 30% 8%;
 
-    --muted: 280 50% 15%;
-    --muted-foreground: 330 50% 70%;
+    --muted: 220 30% 18%;
+    --muted-foreground: 270 30% 70%;
 
-    --accent: 50 100% 50%;
-    --accent-foreground: 280 100% 5%;
+    --accent: 240 100% 60%;
+    --accent-foreground: 220 30% 8%;
 
     --destructive: 0 100% 50%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 280 60% 20%;
-    --input: 280 60% 20%;
-    --ring: 330 100% 55%;
+    --border: 220 40% 22%;
+    --input: 220 40% 22%;
+    --ring: 270 100% 65%;
 
-    --radius: 0.25rem;
+    --radius: 0.5rem;
 
-    --tech-glow: 330 100% 55%;
-    --tech-secondary: 190 100% 50%;
+    --tech-glow: 270 100% 65%;
+    --tech-secondary: 220 90% 55%;
     
-    --gradient-tech: linear-gradient(135deg, hsl(330 100% 55% / 0.15) 0%, hsl(190 100% 50% / 0.15) 100%);
-    --gradient-card: linear-gradient(180deg, hsl(280 80% 10%) 0%, hsl(280 90% 5%) 100%);
-    --gradient-hero: linear-gradient(135deg, hsl(280 100% 4%) 0%, hsl(280 80% 8%) 50%, hsl(280 100% 4%) 100%);
+    --gradient-tech: linear-gradient(135deg, hsl(270 100% 65% / 0.15) 0%, hsl(220 90% 55% / 0.15) 100%);
+    --gradient-card: linear-gradient(180deg, hsl(220 35% 14%) 0%, hsl(220 40% 10%) 100%);
+    --gradient-hero: linear-gradient(135deg, hsl(220 30% 8%) 0%, hsl(230 35% 12%) 50%, hsl(220 30% 8%) 100%);
     
-    --shadow-glow: 0 0 40px hsl(330 100% 55% / 0.3);
-    --shadow-card: 0 8px 32px hsl(330 100% 50% / 0.2);
+    --shadow-glow: 0 0 40px hsl(270 100% 65% / 0.3);
+    --shadow-card: 0 8px 32px hsl(270 100% 50% / 0.2);
     
     --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }

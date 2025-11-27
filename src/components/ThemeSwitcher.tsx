@@ -1,4 +1,4 @@
-import { Sun, Moon, Cpu } from 'lucide-react';
+import { Sun, Moon, Zap } from 'lucide-react';
 import { useTheme } from '@/contexts/ThemeContext';
 
 export const ThemeSwitcher = () => {
@@ -7,7 +7,7 @@ export const ThemeSwitcher = () => {
   const themes = [
     { id: 'white' as const, icon: Sun, label: 'Light' },
     { id: 'black' as const, icon: Moon, label: 'Dark' },
-    { id: 'cyberpunk' as const, icon: Cpu, label: 'Cyberpunk' },
+    { id: 'cyberpunk' as const, icon: Zap, label: 'Cyberpunk' },
   ];
 
   return (
