@@ -4,14 +4,14 @@ import { Mail, Phone, MapPin, Clock } from "lucide-react";
 
 export const Contact = () => {
   return (
-    <section className="py-16 md:py-24 lg:py-32 relative" id="contact">
+    <section className="py-12 md:py-16 lg:py-20 relative" id="contact">
       <div className="container px-4 sm:px-6 lg:px-8">
         <div className="max-w-6xl mx-auto">
           <div className="grid lg:grid-cols-2 gap-8 md:gap-12 items-start lg:items-center">
             {/* Left side - Contact info */}
             <div className="space-y-6 md:space-y-8">
               <div className="space-y-3 md:space-y-4">
-                <h2 className="text-3xl sm:text-4xl md:text-5xl font-tech font-bold leading-tight">
+                <h2 className="text-2xl sm:text-3xl md:text-4xl font-tech font-bold leading-tight">
                   Kontaktieren Sie <span className="text-primary">uns</span>
                 </h2>
                 <p className="text-base md:text-lg text-muted-foreground">
