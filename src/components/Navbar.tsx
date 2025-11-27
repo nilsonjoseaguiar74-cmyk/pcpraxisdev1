@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
+import { ThemeSwitcher } from "./ThemeSwitcher";
 import logo from "@/assets/logo-pc-praxis.jpg";
 export const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -23,10 +24,11 @@ export const Navbar = () => {
           </a>
 
           {/* Desktop menu */}
-          <div className="hidden md:flex items-center gap-8">
+          <div className="hidden md:flex items-center gap-4">
             {menuItems.map(item => <a key={item.label} href={item.href} className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">
                 {item.label}
               </a>)}
+            <ThemeSwitcher />
             <Button variant="hero" size="sm">
               PC konfigurieren
             </Button>
@@ -43,6 +45,9 @@ export const Navbar = () => {
             {menuItems.map(item => <a key={item.label} href={item.href} onClick={() => setIsOpen(false)} className="block text-sm font-medium text-muted-foreground hover:text-primary transition-colors">
                 {item.label}
               </a>)}
+            <div className="flex items-center justify-center">
+              <ThemeSwitcher />
+            </div>
             <Button variant="hero" size="sm" className="w-full">
               PC konfigurieren
             </Button>
