@@ -4,22 +4,19 @@ import { Services } from "@/components/Services";
 import { Configurator } from "@/components/Configurator";
 import { Contact } from "@/components/Contact";
 import { Footer } from "@/components/Footer";
-import { ThemeProvider } from "@/contexts/ThemeContext";
 
 const Index = () => {
   return (
-    <ThemeProvider>
-      <div className="min-h-screen">
-        <Navbar />
-        <main>
-          <Hero />
-          <Services />
-          <Configurator />
-          <Contact />
-        </main>
-        <Footer />
-      </div>
-    </ThemeProvider>
+    <div className="min-h-screen">
+      <Navbar />
+      <main>
+        <Hero />
+        <Services />
+        <Configurator />
+        <Contact />
+      </main>
+      <Footer />
+    </div>
   );
 };
 
