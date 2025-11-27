@@ -1,27 +1,27 @@
-import { useState } from 'react';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 export const LanguageSwitcher = () => {
-  const [currentLang, setCurrentLang] = useState('de');
+  const { language, setLanguage } = useLanguage();
 
   const languages = [
-    { code: 'de', flag: '🇩🇪', label: 'Deutsch' },
-    { code: 'en', flag: '🇺🇸', label: 'English' },
+    { code: 'de' as const, label: 'DE', title: 'Deutsch' },
+    { code: 'en' as const, label: 'EN', title: 'English' },
   ];
 
   return (
-    <div className="flex items-center gap-1">
+    <div className="flex items-center gap-1 p-1 rounded-lg bg-card/50 border border-border backdrop-blur-sm">
       {languages.map((lang) => (
         <button
           key={lang.code}
-          onClick={() => setCurrentLang(lang.code)}
-          className={`p-1.5 rounded transition-all ${
-            currentLang === lang.code
-              ? 'bg-primary/20 scale-110'
-              : 'opacity-50 hover:opacity-100 hover:scale-105'
+          onClick={() => setLanguage(lang.code)}
+          className={`px-2 py-1 rounded text-xs font-medium transition-all ${
+            language === lang.code
+              ? 'bg-primary text-primary-foreground'
+              : 'text-muted-foreground hover:text-foreground hover:bg-card'
           }`}
-          title={lang.label}
+          title={lang.title}
         >
-          <span className="text-lg">{lang.flag}</span>
+          {lang.label}
         </button>
       ))}
     </div>

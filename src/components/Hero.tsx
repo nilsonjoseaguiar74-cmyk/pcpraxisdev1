@@ -2,8 +2,10 @@ import { Button } from "@/components/ui/button";
 import { Monitor, Cpu, Wrench } from "lucide-react";
 import { useEffect, useState } from "react";
 import { DecodeText } from "./DecodeText";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export const Hero = () => {
+  const { t } = useLanguage();
   const [scrollY, setScrollY] = useState(0);
 
   useEffect(() => {
@@ -35,34 +37,33 @@ export const Hero = () => {
           <div className="inline-flex items-center gap-2 px-4 py-2.5 rounded-full bg-gradient-tech border border-border backdrop-blur-sm animate-fade-in" style={{ animationDelay: '0.1s' }}>
             <div className="w-2 h-2 rounded-full bg-foreground animate-pulse" />
             <DecodeText 
-              text="Österreichs Premium PC-Service" 
+              text={t('heroTagline')} 
               className="text-xs sm:text-sm font-medium text-foreground"
             />
           </div>
 
           {/* Main heading */}
           <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-tech font-bold tracking-tight animate-fade-in leading-tight" style={{ animationDelay: '0.3s' }}>
-            <span className="block text-foreground mb-2">Maßgeschneiderte</span>
+            <span className="block text-foreground mb-2">{t('heroTitle')}</span>
             <span className="block bg-gradient-to-r from-foreground via-muted-foreground to-foreground bg-clip-text text-transparent">
-              PC-Lösungen
+              {t('heroSubtitle')}
             </span>
           </h1>
 
           {/* Description */}
           <p className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed px-4 animate-fade-in" style={{ animationDelay: '0.5s' }}>
-            Vom individuellen Gaming-PC bis zur professionellen Workstation – 
-            wir bieten erstklassige Hardware, kompetente Beratung und zuverlässigen Service.
+            {t('heroDescription')}
           </p>
 
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-4 px-4 animate-fade-in" style={{ animationDelay: '0.7s' }}>
             <Button variant="hero" size="xl" className="group w-full sm:w-auto">
               <Monitor className="w-5 h-5 group-hover:scale-110 transition-transform" />
-              PC Konfigurieren
+              {t('heroButton')}
             </Button>
             <Button variant="tech" size="xl" className="group w-full sm:w-auto">
               <Wrench className="w-5 h-5 group-hover:rotate-12 transition-transform" />
-              Services entdecken
+              {t('heroSecondaryButton')}
             </Button>
           </div>
 

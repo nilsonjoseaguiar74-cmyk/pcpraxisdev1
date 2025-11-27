@@ -4,18 +4,20 @@ import { Menu, X } from "lucide-react";
 import { ThemeSwitcher } from "./ThemeSwitcher";
 import { LanguageSwitcher } from "./LanguageSwitcher";
 import { useTheme } from "@/contexts/ThemeContext";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export const Navbar = () => {
   const { theme } = useTheme();
+  const { t } = useLanguage();
   const [isOpen, setIsOpen] = useState(false);
   const menuItems = [{
-    label: "Services",
+    label: t('services'),
     href: "#services"
   }, {
-    label: "Konfigurator",
+    label: t('configurator'),
     href: "#configurator"
   }, {
-    label: "Kontakt",
+    label: t('contact'),
     href: "#contact"
   }];
   return <nav className="fixed top-0 left-0 right-0 z-50 bg-background/90 backdrop-blur-xl border-b border-border transition-all">
@@ -41,7 +43,7 @@ export const Navbar = () => {
             <LanguageSwitcher />
             <ThemeSwitcher />
             <Button variant="hero" size="sm" className="hover:scale-105 transition-transform">
-              PC konfigurieren
+              {t('configurePC')}
             </Button>
           </div>
 
@@ -61,7 +63,7 @@ export const Navbar = () => {
               <ThemeSwitcher />
             </div>
             <Button variant="hero" size="sm" className="w-full">
-              PC konfigurieren
+              {t('configurePC')}
             </Button>
           </div>}
       </div>
