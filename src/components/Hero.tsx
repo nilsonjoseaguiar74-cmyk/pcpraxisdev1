@@ -11,15 +11,15 @@ export const Hero = () => {
       </div>
 
       <div className="container relative z-10 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-4xl mx-auto text-center space-y-8 animate-slide-up">
+        <div className="max-w-4xl mx-auto text-center space-y-8">
           {/* Badge */}
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-tech border border-border backdrop-blur-sm">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-tech border border-border backdrop-blur-sm opacity-0 animate-fade-in" style={{ animationDelay: '0.1s', animationFillMode: 'forwards' }}>
             <div className="w-2 h-2 rounded-full bg-foreground animate-pulse" />
             <span className="text-sm font-medium text-foreground">Österreichs Premium PC-Service</span>
           </div>
 
           {/* Main heading */}
-          <h1 className="text-5xl sm:text-6xl lg:text-7xl font-tech font-bold tracking-tight">
+          <h1 className="text-5xl sm:text-6xl lg:text-7xl font-tech font-bold tracking-tight opacity-0 animate-fade-in" style={{ animationDelay: '0.3s', animationFillMode: 'forwards' }}>
             <span className="block text-foreground">Maßgeschneiderte</span>
             <span className="block bg-gradient-to-r from-foreground via-muted-foreground to-foreground bg-clip-text text-transparent">
               PC-Lösungen
@@ -27,13 +27,13 @@ export const Hero = () => {
           </h1>
 
           {/* Description */}
-          <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+          <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed opacity-0 animate-fade-in" style={{ animationDelay: '0.5s', animationFillMode: 'forwards' }}>
             Vom individuellen Gaming-PC bis zur professionellen Workstation – 
             wir bieten erstklassige Hardware, kompetente Beratung und zuverlässigen Service.
           </p>
 
           {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-4">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-4 opacity-0 animate-fade-in" style={{ animationDelay: '0.7s', animationFillMode: 'forwards' }}>
             <Button variant="hero" size="xl" className="group">
               <Monitor className="w-5 h-5 group-hover:scale-110 transition-transform" />
               PC Konfigurieren
@@ -45,7 +45,7 @@ export const Hero = () => {
           </div>
 
           {/* Stats */}
-          <div className="grid grid-cols-3 gap-8 pt-12 max-w-2xl mx-auto">
+          <div className="grid grid-cols-3 gap-8 pt-12 max-w-2xl mx-auto opacity-0 animate-fade-in" style={{ animationDelay: '0.9s', animationFillMode: 'forwards' }}>
             <div className="space-y-2">
               <div className="text-3xl font-tech font-bold text-foreground">500+</div>
               <div className="text-sm text-muted-foreground">Zufriedene Kunden</div>
