@@ -1,4 +1,5 @@
 import { useTheme } from "@/contexts/ThemeContext";
+import { DecodeText } from "./DecodeText";
 
 export const Footer = () => {
   const { theme } = useTheme();
@@ -63,16 +64,22 @@ export const Footer = () => {
         <div className="pt-8 border-t border-border space-y-4">
           {/* Crypto payment info */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pb-4">
-            <span className="text-xs md:text-sm text-muted-foreground">Aceitamos pagamentos em:</span>
+            <span className="text-xs md:text-sm text-muted-foreground">Wir akzeptieren Zahlungen in:</span>
             <div className="flex items-center gap-3 flex-wrap justify-center">
               <div className="px-3 py-1.5 rounded-full bg-card border border-border hover:border-primary/30 transition-all cursor-pointer group">
-                <span className="text-xs font-medium group-hover:text-primary transition-colors">₿ Bitcoin</span>
+                <span className="text-xs font-medium group-hover:text-primary transition-colors">
+                  <DecodeText text="₿ Bitcoin" decodeTime={1500} displayTime={4000} loop={true} />
+                </span>
               </div>
               <div className="px-3 py-1.5 rounded-full bg-card border border-border hover:border-primary/30 transition-all cursor-pointer group">
-                <span className="text-xs font-medium group-hover:text-primary transition-colors">Ξ Ethereum</span>
+                <span className="text-xs font-medium group-hover:text-primary transition-colors">
+                  <DecodeText text="Ξ Ethereum" decodeTime={1500} displayTime={4000} loop={true} />
+                </span>
               </div>
               <div className="px-3 py-1.5 rounded-full bg-card border border-border hover:border-primary/30 transition-all cursor-pointer group">
-                <span className="text-xs font-medium group-hover:text-primary transition-colors">₮ USDT</span>
+                <span className="text-xs font-medium group-hover:text-primary transition-colors">
+                  <DecodeText text="₮ USDT" decodeTime={1500} displayTime={4000} loop={true} />
+                </span>
               </div>
             </div>
           </div>
@@ -81,10 +88,21 @@ export const Footer = () => {
             <p className="text-xs md:text-sm text-muted-foreground">
               © {currentYear} PC Praxis - Pedro Hauser. Alle Rechte vorbehalten.
             </p>
-            <div className="flex items-center gap-2 text-xs md:text-sm text-muted-foreground">
-              <span>Made with</span>
-              <span className="text-primary animate-pulse">❤️</span>
-              <span>in Austria 🇦🇹</span>
+            <div className="flex items-center gap-4">
+              <div className="flex items-center gap-2 text-xs md:text-sm text-muted-foreground">
+                <span>Made with</span>
+                <span className="text-primary animate-pulse">❤️</span>
+                <span>in Austria 🇦🇹</span>
+              </div>
+              <span className="text-muted-foreground/50 text-xs">•</span>
+              <a 
+                href="https://rodrigo.run" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-[10px] text-muted-foreground/60 hover:text-primary transition-colors"
+              >
+                DEV - rodrigo.run
+              </a>
             </div>
           </div>
         </div>
