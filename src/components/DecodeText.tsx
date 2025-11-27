@@ -3,20 +3,32 @@ import { useEffect, useState } from "react";
 interface DecodeTextProps {
   text: string;
   className?: string;
+  decodeTime?: number; // in milliseconds
+  displayTime?: number; // in milliseconds
+  loop?: boolean;
 }
 
 const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+-=[]{}|;:,.<>?";
 
-export const DecodeText = ({ text, className = "" }: DecodeTextProps) => {
+export const DecodeText = ({ 
+  text, 
+  className = "", 
+  decodeTime = 2000, 
+  displayTime = 5000,
+  loop = true 
+}: DecodeTextProps) => {
   const [displayText, setDisplayText] = useState(text);
   const [isDecoding, setIsDecoding] = useState(false);
 
   useEffect(() => {
     let interval: NodeJS.Timeout;
-    let iteration = 0;
+    let displayTimeout: NodeJS.Timeout;
 
     const startDecoding = () => {
       setIsDecoding(true);
+      let iteration = 0;
+      const steps = text.length * 3;
+      const stepDuration = decodeTime / steps;
       
       interval = setInterval(() => {
         setDisplayText(
@@ -25,7 +37,7 @@ export const DecodeText = ({ text, className = "" }: DecodeTextProps) => {
             .map((char, index) => {
               if (char === " ") return " ";
               
-              if (index < iteration) {
+              if (index < iteration / 3) {
                 return text[index];
               }
               
@@ -34,23 +46,36 @@ export const DecodeText = ({ text, className = "" }: DecodeTextProps) => {
             .join("")
         );
 
-        if (iteration >= text.length) {
+        if (iteration >= steps) {
           clearInterval(interval);
+          setDisplayText(text);
           setIsDecoding(false);
+          
+          // Show correct text for displayTime, then restart if loop is enabled
+          if (loop) {
+            displayTimeout = setTimeout(() => {
+              startDecoding();
+            }, displayTime);
+          }
         }
 
-        iteration += 1 / 3;
-      }, 30);
+        iteration += 1;
+      }, stepDuration);
     };
 
-    // Start decoding after component mounts
-    const timeout = setTimeout(startDecoding, 500);
+    // Start first decode after component mounts
+    const initialTimeout = setTimeout(startDecoding, 500);
 
     return () => {
       clearInterval(interval);
-      clearTimeout(timeout);
+      clearTimeout(displayTimeout);
+      clearTimeout(initialTimeout);
     };
-  }, [text]);
+  }, [text, decodeTime, displayTime, loop]);
 
-  return <span className={className}>{displayText}</span>;
+  return (
+    <span className={`${className} ${isDecoding ? "opacity-80" : "opacity-100"} transition-opacity duration-300`}>
+      {displayText}
+    </span>
+  );
 };

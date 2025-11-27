@@ -29,6 +29,13 @@ export const Services = () => {
       <div className="container px-4 sm:px-6 lg:px-8">
         {/* Section header */}
         <div className="max-w-3xl mx-auto text-center mb-10 md:mb-12 space-y-4">
+          <div className="inline-flex items-center gap-3 mb-2">
+            <div className="h-px w-8 bg-gradient-to-r from-transparent via-primary/50 to-primary" />
+            <span className="text-xs sm:text-sm font-medium text-primary uppercase tracking-wider">
+              Privat & Business
+            </span>
+            <div className="h-px w-8 bg-gradient-to-l from-transparent via-primary/50 to-primary" />
+          </div>
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-tech font-bold leading-tight">
             Unsere <span className="text-primary">Services</span>
           </h2>
