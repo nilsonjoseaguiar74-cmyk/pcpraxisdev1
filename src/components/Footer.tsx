@@ -1,8 +1,10 @@
 import { useTheme } from "@/contexts/ThemeContext";
+import { useLanguage } from "@/contexts/LanguageContext";
 import { DecodeText } from "./DecodeText";
 
 export const Footer = () => {
   const { theme } = useTheme();
+  const { t } = useLanguage();
   const currentYear = new Date().getFullYear();
 
   return (
@@ -22,40 +24,40 @@ export const Footer = () => {
               />
             </div>
             <p className="text-sm text-muted-foreground leading-relaxed max-w-xs">
-              Ihr Experte für maßgeschneiderte PC-Systeme und professionellen IT-Service in Österreich.
+              {t('footerBrand')}
             </p>
           </div>
 
           {/* Services */}
           <div>
-            <h3 className="font-tech font-semibold mb-3 md:mb-4 text-sm md:text-base">Services</h3>
+            <h3 className="font-tech font-semibold mb-3 md:mb-4 text-sm md:text-base">{t('footerServices')}</h3>
             <ul className="space-y-2 md:space-y-2.5 text-sm text-muted-foreground">
-              <li><a href="#configurator" className="hover:text-primary transition-colors inline-block hover:translate-x-1 transition-transform">PC Konfigurator</a></li>
-              <li><a href="#services" className="hover:text-primary transition-colors inline-block hover:translate-x-1 transition-transform">Hardware Shop</a></li>
-              <li><a href="#services" className="hover:text-primary transition-colors inline-block hover:translate-x-1 transition-transform">Wartung & Reparatur</a></li>
-              <li><a href="#services" className="hover:text-primary transition-colors inline-block hover:translate-x-1 transition-transform">Upgrades</a></li>
+              <li><a href="#configurator" className="hover:text-primary transition-colors inline-block hover:translate-x-1 transition-transform">{t('configurator')}</a></li>
+              <li><a href="#services" className="hover:text-primary transition-colors inline-block hover:translate-x-1 transition-transform">{t('footerHardwareShop')}</a></li>
+              <li><a href="#services" className="hover:text-primary transition-colors inline-block hover:translate-x-1 transition-transform">{t('footerMaintenance')}</a></li>
+              <li><a href="#services" className="hover:text-primary transition-colors inline-block hover:translate-x-1 transition-transform">{t('footerUpgrades')}</a></li>
             </ul>
           </div>
 
           {/* Company */}
           <div>
-            <h3 className="font-tech font-semibold mb-3 md:mb-4 text-sm md:text-base">Unternehmen</h3>
+            <h3 className="font-tech font-semibold mb-3 md:mb-4 text-sm md:text-base">{t('footerCompany')}</h3>
             <ul className="space-y-2 md:space-y-2.5 text-sm text-muted-foreground">
-              <li><a href="#" className="hover:text-primary transition-colors inline-block hover:translate-x-1 transition-transform">Über uns</a></li>
-              <li><a href="#contact" className="hover:text-primary transition-colors inline-block hover:translate-x-1 transition-transform">Kontakt</a></li>
-              <li><a href="#" className="hover:text-primary transition-colors inline-block hover:translate-x-1 transition-transform">AGB</a></li>
-              <li><a href="#" className="hover:text-primary transition-colors inline-block hover:translate-x-1 transition-transform">Impressum</a></li>
+              <li><a href="#" className="hover:text-primary transition-colors inline-block hover:translate-x-1 transition-transform">{t('footerAbout')}</a></li>
+              <li><a href="#contact" className="hover:text-primary transition-colors inline-block hover:translate-x-1 transition-transform">{t('contact')}</a></li>
+              <li><a href="#" className="hover:text-primary transition-colors inline-block hover:translate-x-1 transition-transform">{t('footerTerms')}</a></li>
+              <li><a href="#" className="hover:text-primary transition-colors inline-block hover:translate-x-1 transition-transform">{t('footerImprint')}</a></li>
             </ul>
           </div>
 
           {/* Legal */}
           <div>
-            <h3 className="font-tech font-semibold mb-3 md:mb-4 text-sm md:text-base">Rechtliches</h3>
+            <h3 className="font-tech font-semibold mb-3 md:mb-4 text-sm md:text-base">{t('footerLegal')}</h3>
             <ul className="space-y-2 md:space-y-2.5 text-sm text-muted-foreground">
-              <li><a href="#" className="hover:text-primary transition-colors inline-block hover:translate-x-1 transition-transform">Datenschutz</a></li>
-              <li><a href="#" className="hover:text-primary transition-colors inline-block hover:translate-x-1 transition-transform">Cookie-Richtlinie</a></li>
-              <li><a href="#" className="hover:text-primary transition-colors inline-block hover:translate-x-1 transition-transform">GDPR</a></li>
-              <li><a href="#" className="hover:text-primary transition-colors inline-block hover:translate-x-1 transition-transform">Widerrufsrecht</a></li>
+              <li><a href="#" className="hover:text-primary transition-colors inline-block hover:translate-x-1 transition-transform">{t('footerPrivacy')}</a></li>
+              <li><a href="#" className="hover:text-primary transition-colors inline-block hover:translate-x-1 transition-transform">{t('footerCookies')}</a></li>
+              <li><a href="#" className="hover:text-primary transition-colors inline-block hover:translate-x-1 transition-transform">{t('footerGDPR')}</a></li>
+              <li><a href="#" className="hover:text-primary transition-colors inline-block hover:translate-x-1 transition-transform">{t('footerWithdrawal')}</a></li>
             </ul>
           </div>
         </div>
@@ -64,7 +66,7 @@ export const Footer = () => {
         <div className="pt-8 border-t border-border space-y-4">
           {/* Crypto payment info */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pb-4">
-            <span className="text-xs md:text-sm text-muted-foreground">Wir akzeptieren Zahlungen in:</span>
+            <span className="text-xs md:text-sm text-muted-foreground">{t('footerCryptoPayments')}</span>
             <div className="flex items-center gap-3 flex-wrap justify-center">
               <div className="px-3 py-1.5 rounded-full bg-card border border-border hover:border-primary/30 transition-all cursor-pointer group">
                 <span className="text-xs font-medium group-hover:text-primary transition-colors">
@@ -86,13 +88,13 @@ export const Footer = () => {
           
           <div className="flex flex-col sm:flex-row justify-between items-center gap-4 text-center sm:text-left">
             <p className="text-xs md:text-sm text-muted-foreground">
-              © {currentYear} PC Praxis - Pedro Hauser. Alle Rechte vorbehalten.
+              © {currentYear} PC Praxis - Pedro Hauser. {t('footerRights')}
             </p>
             <div className="flex items-center gap-4">
               <div className="flex items-center gap-2 text-xs md:text-sm text-muted-foreground">
-                <span>Made with</span>
+                <span>{t('footerMadeWith')}</span>
                 <span className="text-primary animate-pulse">❤️</span>
-                <span>in Austria 🇦🇹</span>
+                <span>{t('footerIn')} 🇦🇹</span>
               </div>
               <span className="text-muted-foreground/50 text-xs">•</span>
               <a 
