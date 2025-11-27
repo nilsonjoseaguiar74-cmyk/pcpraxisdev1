@@ -13,16 +13,16 @@ const configuratorCategories = [
 
 export const Configurator = () => {
   return (
-    <section className="py-16 md:py-24 lg:py-32 relative bg-gradient-to-b from-background to-card/30" id="configurator">
+    <section className="py-12 md:py-16 lg:py-20 relative bg-gradient-to-b from-background to-card/30" id="configurator">
       <div className="container px-4 sm:px-6 lg:px-8">
         {/* Section header */}
-        <div className="max-w-3xl mx-auto text-center mb-12 md:mb-16 space-y-4">
+        <div className="max-w-3xl mx-auto text-center mb-10 md:mb-12 space-y-4">
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/10 border border-primary/20 animate-fade-in">
             <Cpu className="w-4 h-4 text-primary" />
             <span className="text-xs sm:text-sm font-medium text-primary">PC Konfigurator</span>
           </div>
           
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-tech font-bold leading-tight px-4">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-tech font-bold leading-tight px-4">
             Bauen Sie Ihren <span className="text-primary">Traum-PC</span>
           </h2>
           

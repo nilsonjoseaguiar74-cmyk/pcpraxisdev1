@@ -25,11 +25,11 @@ const services = [
 
 export const Services = () => {
   return (
-    <section className="py-16 md:py-24 lg:py-32 relative" id="services">
+    <section className="py-12 md:py-16 lg:py-20 relative" id="services">
       <div className="container px-4 sm:px-6 lg:px-8">
         {/* Section header */}
-        <div className="max-w-3xl mx-auto text-center mb-12 md:mb-16 space-y-4">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-tech font-bold leading-tight">
+        <div className="max-w-3xl mx-auto text-center mb-10 md:mb-12 space-y-4">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-tech font-bold leading-tight">
             Unsere <span className="text-primary">Services</span>
           </h2>
           <p className="text-base md:text-lg text-muted-foreground px-4">

@@ -16,7 +16,7 @@ export const Hero = () => {
   }, []);
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-hero pt-16">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-hero pt-16 pb-12">
       {/* Animated background elements with parallax */}
       <div className="absolute inset-0 opacity-10">
         <div 
@@ -29,7 +29,7 @@ export const Hero = () => {
         />
       </div>
 
-      <div className="container relative z-10 px-4 sm:px-6 lg:px-8 py-20 md:py-0">
+      <div className="container relative z-10 px-4 sm:px-6 lg:px-8 py-12 md:py-0">
         <div className="max-w-5xl mx-auto text-center space-y-8 md:space-y-12">
           {/* Badge */}
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-tech border border-border backdrop-blur-sm animate-fade-in" style={{ animationDelay: '0.1s' }}>
@@ -41,7 +41,7 @@ export const Hero = () => {
           </div>
 
           {/* Main heading */}
-          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-tech font-bold tracking-tight animate-fade-in leading-tight" style={{ animationDelay: '0.3s' }}>
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-tech font-bold tracking-tight animate-fade-in leading-tight" style={{ animationDelay: '0.3s' }}>
             <span className="block text-foreground mb-2">Maßgeschneiderte</span>
             <span className="block bg-gradient-to-r from-foreground via-muted-foreground to-foreground bg-clip-text text-transparent">
               PC-Lösungen
