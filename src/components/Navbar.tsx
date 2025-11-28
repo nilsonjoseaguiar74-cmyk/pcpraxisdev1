@@ -3,7 +3,6 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Menu, X, LogIn, LogOut, User, ShoppingCart } from "lucide-react";
 import { ThemeSwitcher } from "./ThemeSwitcher";
-import { LanguageSwitcher } from "./LanguageSwitcher";
 import { useTheme } from "@/contexts/ThemeContext";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useAuth } from "@/contexts/AuthContext";
@@ -68,7 +67,6 @@ export const Navbar = () => {
             </Button>
             
             <ThemeSwitcher />
-            <LanguageSwitcher />
             {isAdmin && (
               <Button 
                 variant="ghost" 
@@ -136,7 +134,6 @@ export const Navbar = () => {
             
             <div className="flex items-center justify-center gap-4 pt-2">
               <ThemeSwitcher />
-              <LanguageSwitcher />
             </div>
             {isAdmin && (
               <Button 
