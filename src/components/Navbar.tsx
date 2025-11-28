@@ -1,13 +1,17 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Menu, X } from "lucide-react";
+import { Menu, X, LogIn, LogOut, User } from "lucide-react";
 import { ThemeSwitcher } from "./ThemeSwitcher";
 import { useTheme } from "@/contexts/ThemeContext";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useAuth } from "@/contexts/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 export const Navbar = () => {
   const { theme } = useTheme();
   const { t } = useLanguage();
+  const { user, signOut } = useAuth();
+  const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
   const menuItems = [{
     label: t('services'),
@@ -40,6 +44,29 @@ export const Navbar = () => {
                 {item.label}
               </a>)}
             <ThemeSwitcher />
+            {user ? (
+              <>
+                <Button 
+                  variant="outline" 
+                  size="sm" 
+                  onClick={() => signOut()}
+                  className="hover:scale-105 transition-transform"
+                >
+                  <LogOut className="w-4 h-4 mr-2" />
+                  Sair
+                </Button>
+              </>
+            ) : (
+              <Button 
+                variant="outline" 
+                size="sm" 
+                onClick={() => navigate('/auth')}
+                className="hover:scale-105 transition-transform"
+              >
+                <LogIn className="w-4 h-4 mr-2" />
+                Entrar
+              </Button>
+            )}
             <Button variant="hero" size="sm" className="hover:scale-105 transition-transform">
               {t('configurePC')}
             </Button>
@@ -59,6 +86,33 @@ export const Navbar = () => {
             <div className="flex items-center justify-center gap-4 pt-2">
               <ThemeSwitcher />
             </div>
+            {user ? (
+              <Button 
+                variant="outline" 
+                size="sm" 
+                className="w-full"
+                onClick={() => {
+                  signOut();
+                  setIsOpen(false);
+                }}
+              >
+                <LogOut className="w-4 h-4 mr-2" />
+                Sair
+              </Button>
+            ) : (
+              <Button 
+                variant="outline" 
+                size="sm" 
+                className="w-full"
+                onClick={() => {
+                  navigate('/auth');
+                  setIsOpen(false);
+                }}
+              >
+                <LogIn className="w-4 h-4 mr-2" />
+                Entrar
+              </Button>
+            )}
             <Button variant="hero" size="sm" className="w-full">
               {t('configurePC')}
             </Button>
