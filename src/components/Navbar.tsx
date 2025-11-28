@@ -2,7 +2,6 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 import { ThemeSwitcher } from "./ThemeSwitcher";
-import { LanguageSwitcher } from "./LanguageSwitcher";
 import { useTheme } from "@/contexts/ThemeContext";
 import { useLanguage } from "@/contexts/LanguageContext";
 
@@ -40,7 +39,6 @@ export const Navbar = () => {
             {menuItems.map(item => <a key={item.label} href={item.href} className="text-sm font-medium text-muted-foreground hover:text-primary transition-all hover:scale-105">
                 {item.label}
               </a>)}
-            <LanguageSwitcher />
             <ThemeSwitcher />
             <Button variant="hero" size="sm" className="hover:scale-105 transition-transform">
               {t('configurePC')}
@@ -59,7 +57,6 @@ export const Navbar = () => {
                 {item.label}
               </a>)}
             <div className="flex items-center justify-center gap-4 pt-2">
-              <LanguageSwitcher />
               <ThemeSwitcher />
             </div>
             <Button variant="hero" size="sm" className="w-full">
