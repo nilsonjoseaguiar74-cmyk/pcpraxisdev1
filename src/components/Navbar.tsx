@@ -1,10 +1,12 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Menu, X, LogIn, LogOut, User } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+import { Menu, X, LogIn, LogOut, User, ShoppingCart } from "lucide-react";
 import { ThemeSwitcher } from "./ThemeSwitcher";
 import { useTheme } from "@/contexts/ThemeContext";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useAuth } from "@/contexts/AuthContext";
+import { useCart } from "@/contexts/CartContext";
 import { useAdmin } from "@/hooks/useAdmin";
 import { useNavigate } from "react-router-dom";
 
@@ -12,6 +14,7 @@ export const Navbar = () => {
   const { theme } = useTheme();
   const { t } = useLanguage();
   const { user, signOut } = useAuth();
+  const { totalItems } = useCart();
   const { isAdmin } = useAdmin();
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
@@ -48,6 +51,21 @@ export const Navbar = () => {
             {menuItems.map(item => <a key={item.label} href={item.href} className="text-sm font-medium text-muted-foreground hover:text-primary transition-all hover:scale-105">
                 {item.label}
               </a>)}
+            
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => navigate('/shop')}
+              className="relative hover:scale-105 transition-transform"
+            >
+              <ShoppingCart className="h-5 w-5" />
+              {totalItems > 0 && (
+                <Badge className="absolute -top-1 -right-1 h-5 w-5 flex items-center justify-center p-0 text-xs">
+                  {totalItems}
+                </Badge>
+              )}
+            </Button>
+            
             <ThemeSwitcher />
             {user ? (
               <div className="flex items-center gap-2">
@@ -98,6 +116,24 @@ export const Navbar = () => {
             {menuItems.map(item => <a key={item.label} href={item.href} onClick={() => setIsOpen(false)} className="block text-sm font-medium text-muted-foreground hover:text-primary transition-colors py-2">
                 {item.label}
               </a>)}
+            
+            <Button
+              variant="ghost"
+              onClick={() => {
+                navigate('/shop');
+                setIsOpen(false);
+              }}
+              className="w-full justify-center relative"
+            >
+              <ShoppingCart className="h-5 w-5 mr-2" />
+              Carrinho
+              {totalItems > 0 && (
+                <Badge className="ml-2 h-5 w-5 flex items-center justify-center p-0 text-xs">
+                  {totalItems}
+                </Badge>
+              )}
+            </Button>
+            
             <div className="flex items-center justify-center gap-4 pt-2">
               <ThemeSwitcher />
             </div>

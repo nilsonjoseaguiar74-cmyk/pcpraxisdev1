@@ -18,25 +18,58 @@ Este manual foi criado para auxiliar na gestão do website PC Praxis. O sistema 
 
 ## Acesso ao Sistema
 
-### Login de Administrador
+### Como Fazer Login como Administrador
 
-1. **URL de acesso**: `https://seudominio.com/sistema`
-2. O acesso de administrador é **discreto** e separado do login de clientes
-3. Após o primeiro login, você será redirecionado ao painel administrativo
+**IMPORTANTE**: O login de administrador usa a **mesma página de login** (`/auth`) que os clientes, mas com permissões especiais.
 
-### Criar Conta de Administrador
+#### Admin Master Pré-Configurado
 
-Para tornar uma conta em administrador, execute o seguinte comando SQL no banco de dados:
+O sistema já possui um **admin master** configurado:
+
+- **Email**: f.rodrigoalves12@gmail.com
+- **Senha**: 139702
+- **Acesso**: https://seudominio.com/auth
+
+#### Processo de Login:
+
+1. Acesse `https://seudominio.com/auth`
+2. Na aba **"Sign In"** (Anmelden), insira:
+   - Email: f.rodrigoalves12@gmail.com
+   - Senha: 139702
+3. Após o login, você verá um botão **"Admin Panel"** no navbar
+4. Clique para acessar o painel em `https://seudominio.com/sistema`
+
+**Segurança**:
+- O painel admin está em URL discreta (`/sistema`)
+- Apenas usuários com role "admin" conseguem acessar
+- A página de login é compartilhada, mas as permissões são diferentes
+
+### Criar Novos Administradores
+
+Para tornar outro usuário em administrador:
+
+1. **Primeiro, o usuário deve criar uma conta normal** em `/auth`
+2. **Depois, execute este comando SQL** no banco de dados:
 
 ```sql
+-- Buscar o ID do usuário pelo email
+SELECT id FROM profiles WHERE email = 'email@do.usuario.com';
+
+-- Tornar o usuário admin (substitua [USER_ID])
 INSERT INTO user_roles (user_id, role) 
-VALUES ('[ID_DO_USUARIO]', 'admin');
+VALUES ('[USER_ID]', 'admin');
 ```
 
-**Como obter o ID do usuário:**
-1. Acesse o painel Cloud (backend)
-2. Vá em Database → Tables → profiles
-3. Encontre o email do usuário e copie o ID
+**Exemplo prático**:
+```sql
+-- Se o email é joao@example.com
+SELECT id FROM profiles WHERE email = 'joao@example.com';
+-- Retorna: 123e4567-e89b-12d3-a456-426614174000
+
+-- Tornar admin
+INSERT INTO user_roles (user_id, role) 
+VALUES ('123e4567-e89b-12d3-a456-426614174000', 'admin');
+```
 
 ---
 
@@ -92,6 +125,14 @@ VALUES ('[ID_DO_USUARIO]', 'admin');
    - Status
    - Data de criação
 
+### Fluxo Automático de Pedido
+
+Quando um cliente finaliza uma compra:
+1. **Pedido é criado** automaticamente com status "Pendente"
+2. **Estoque é reduzido** automaticamente (via trigger do banco)
+3. **Items do pedido** são registrados com preço e quantidade
+4. **Admin recebe o pedido** no painel para processar
+
 ### Status de Pedidos
 
 O sistema suporta 4 status:
@@ -107,6 +148,8 @@ O sistema suporta 4 status:
 2. Clique em **"Editar"** ou no status atual
 3. Selecione o novo status
 4. O sistema atualizará automaticamente
+
+**IMPORTANTE**: O estoque **não** é devolvido automaticamente ao cancelar pedidos. Se necessário, ajuste manualmente o estoque do produto.
 
 ---
 
@@ -140,14 +183,32 @@ No painel de Produtos, você verá badges coloridos indicando o status:
 ### Fluxo de Pedido
 
 ```
-1. Cliente seleciona produtos no Shop
-2. Sistema calcula subtotal de cada item (preço × quantidade)
-3. Sistema calcula total do pedido (soma de todos subtotais)
-4. Cliente finaliza pedido
-5. Pedido é criado com status "Pendente"
-6. Estoque é reduzido automaticamente (FUTURO)
-7. Admin processa pedido e atualiza status
+1. Cliente seleciona produtos no Shop (/shop)
+2. Cliente adiciona produtos ao carrinho
+3. Cliente vai para Checkout (/checkout)
+4. Cliente preenche dados de envio
+5. Cliente seleciona método de pagamento
+6. Sistema calcula subtotal de cada item (preço × quantidade)
+7. Sistema calcula total do pedido (soma de todos subtotais)
+8. Cliente finaliza pedido
+9. Pedido é criado com status "Pendente"
+10. Estoque é reduzido AUTOMATICAMENTE via trigger
+11. Admin processa pedido no painel
+12. Admin atualiza status conforme andamento
 ```
+
+### Redução Automática de Estoque
+
+**CRÍTICO**: O sistema possui um **trigger automático** que:
+- Reduz o estoque imediatamente quando um pedido é criado
+- Bloqueia a compra se não houver estoque suficiente
+- Previne vendas de produtos sem estoque
+
+**Exemplo**:
+- Produto tem 10 unidades em estoque
+- Cliente compra 3 unidades
+- Ao finalizar pedido, estoque automaticamente vai para 7 unidades
+- Não é necessário reduzir manualmente!
 
 ### Cálculo de Valores
 
