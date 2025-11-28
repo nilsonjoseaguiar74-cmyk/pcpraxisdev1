@@ -1,14 +1,18 @@
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { supabase } from '@/integrations/supabase/client';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { useCart } from '@/contexts/CartContext';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
 import { useToast } from '@/hooks/use-toast';
 import { Navbar } from '@/components/Navbar';
 import { Footer } from '@/components/Footer';
-import { Loader2 } from 'lucide-react';
+import { Loader2, ShoppingCart, Plus, Minus } from 'lucide-react';
 
 interface Product {
   id: string;
@@ -25,9 +29,12 @@ interface Product {
 export default function Shop() {
   const [products, setProducts] = useState<Product[]>([]);
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
+  const [selectedQuantity, setSelectedQuantity] = useState(1);
   const [loading, setLoading] = useState(true);
   const { t } = useLanguage();
   const { toast } = useToast();
+  const { addItem, totalItems } = useCart();
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetchProducts();
@@ -60,18 +67,48 @@ export default function Shop() {
     }).format(price);
   };
 
+  const handleAddToCart = (product: Product) => {
+    addItem({
+      id: product.id,
+      name: product.name,
+      price: product.price,
+      image_url: product.image_url,
+      part_number: product.part_number,
+      availableStock: product.quantity,
+      quantity: selectedQuantity,
+    });
+    setSelectedProduct(null);
+    setSelectedQuantity(1);
+  };
+
   return (
     <div className="min-h-screen flex flex-col bg-background">
       <Navbar />
       
       <main className="flex-1 container mx-auto px-4 py-24">
-        <div className="text-center mb-12 space-y-4">
-          <h1 className="text-5xl font-bold bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent">
-            {t('shopTitle')}
-          </h1>
-          <p className="text-xl text-muted-foreground">
-            {t('shopSubtitle')}
-          </p>
+        <div className="flex justify-between items-center mb-12">
+          <div className="text-center flex-1 space-y-4">
+            <h1 className="text-5xl font-bold bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent">
+              {t('shopTitle')}
+            </h1>
+            <p className="text-xl text-muted-foreground">
+              {t('shopSubtitle')}
+            </p>
+          </div>
+          
+          <Button
+            onClick={() => navigate('/checkout')}
+            className="relative"
+            size="lg"
+          >
+            <ShoppingCart className="mr-2 h-5 w-5" />
+            Carrinho
+            {totalItems > 0 && (
+              <Badge className="absolute -top-2 -right-2 h-6 w-6 flex items-center justify-center p-0">
+                {totalItems}
+              </Badge>
+            )}
+          </Button>
         </div>
 
         {loading ? (
@@ -143,7 +180,10 @@ export default function Shop() {
       <Footer />
 
       {/* Product Details Dialog */}
-      <Dialog open={!!selectedProduct} onOpenChange={() => setSelectedProduct(null)}>
+      <Dialog open={!!selectedProduct} onOpenChange={() => {
+        setSelectedProduct(null);
+        setSelectedQuantity(1);
+      }}>
         <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto">
           <DialogHeader>
             <DialogTitle className="text-2xl">{selectedProduct?.name}</DialogTitle>
@@ -207,12 +247,56 @@ export default function Shop() {
                 )}
               </div>
 
-              <Button
-                onClick={() => setSelectedProduct(null)}
-                className="w-full"
-              >
-                {t('shopCloseDetails')}
-              </Button>
+              {selectedProduct.quantity > 0 ? (
+                <div className="space-y-4">
+                  <div className="flex items-center gap-4">
+                    <Label className="text-base font-semibold">Quantidade:</Label>
+                    <div className="flex items-center gap-2">
+                      <Button
+                        variant="outline"
+                        size="icon"
+                        onClick={() => setSelectedQuantity(Math.max(1, selectedQuantity - 1))}
+                      >
+                        <Minus className="h-4 w-4" />
+                      </Button>
+                      <Input
+                        type="number"
+                        min="1"
+                        max={selectedProduct.quantity}
+                        value={selectedQuantity}
+                        onChange={(e) => {
+                          const val = parseInt(e.target.value) || 1;
+                          setSelectedQuantity(Math.min(selectedProduct.quantity, Math.max(1, val)));
+                        }}
+                        className="w-20 text-center"
+                      />
+                      <Button
+                        variant="outline"
+                        size="icon"
+                        onClick={() => setSelectedQuantity(Math.min(selectedProduct.quantity, selectedQuantity + 1))}
+                      >
+                        <Plus className="h-4 w-4" />
+                      </Button>
+                    </div>
+                    <span className="text-sm text-muted-foreground">
+                      (máx: {selectedProduct.quantity})
+                    </span>
+                  </div>
+
+                  <Button
+                    onClick={() => handleAddToCart(selectedProduct)}
+                    className="w-full"
+                    size="lg"
+                  >
+                    <ShoppingCart className="mr-2 h-5 w-5" />
+                    {t('shopAddToCart')}
+                  </Button>
+                </div>
+              ) : (
+                <Button disabled className="w-full" size="lg">
+                  {t('shopOutOfStock')}
+                </Button>
+              )}
             </div>
           )}
         </DialogContent>
