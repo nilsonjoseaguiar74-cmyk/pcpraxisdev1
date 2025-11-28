@@ -8,7 +8,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { useAuth } from "@/contexts/AuthContext";
 import { useCart } from "@/contexts/CartContext";
 import { useAdmin } from "@/hooks/useAdmin";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 export const Navbar = () => {
   const { theme } = useTheme();
@@ -18,6 +18,21 @@ export const Navbar = () => {
   const { isAdmin } = useAdmin();
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
+  
+  const handleMenuClick = (href: string) => {
+    if (href.startsWith('#')) {
+      // Smooth scroll for anchor links
+      const element = document.querySelector(href);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    } else {
+      // Navigate for routes
+      navigate(href);
+    }
+    setIsOpen(false);
+  };
+  
   const menuItems = [{
     label: t('services'),
     href: "#services"
@@ -35,7 +50,7 @@ export const Navbar = () => {
       <div className="container px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 md:h-20">
           {/* Logo */}
-          <a href="#" className="flex items-center gap-3 group transition-transform hover:scale-105">
+          <Link to="/" className="flex items-center gap-3 group transition-transform hover:scale-105">
             <img 
               alt="PC Praxis Logo" 
               className="h-10 md:h-14 w-auto object-contain transition-all duration-300" 
@@ -44,27 +59,33 @@ export const Navbar = () => {
                 : "/lovable-uploads/logo-white.svg"
               }
             />
-          </a>
+          </Link>
 
           {/* Desktop menu */}
           <div className="hidden md:flex items-center gap-6 lg:gap-8">
-            {menuItems.map(item => <a key={item.label} href={item.href} className="text-sm font-medium text-muted-foreground hover:text-primary transition-all hover:scale-105">
+            {menuItems.map(item => (
+              <button 
+                key={item.label} 
+                onClick={() => handleMenuClick(item.href)} 
+                className="text-sm font-medium text-muted-foreground hover:text-primary transition-all hover:scale-105"
+              >
                 {item.label}
-              </a>)}
+              </button>
+            ))}
             
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={() => navigate('/shop')}
-              className="relative hover:scale-105 transition-transform"
-            >
-              <ShoppingCart className="h-5 w-5" />
-              {totalItems > 0 && (
-                <Badge className="absolute -top-1 -right-1 h-5 w-5 flex items-center justify-center p-0 text-xs">
+            {totalItems > 0 && (
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={() => navigate('/checkout')}
+                className="relative hover:scale-105 transition-transform"
+              >
+                <ShoppingCart className="h-5 w-5" />
+                <Badge className="absolute -top-1 -right-1 h-5 w-5 flex items-center justify-center p-0 text-xs animate-pulse">
                   {totalItems}
                 </Badge>
-              )}
-            </Button>
+              </Button>
+            )}
             
             <ThemeSwitcher />
             {isAdmin && (
@@ -111,26 +132,32 @@ export const Navbar = () => {
 
         {/* Mobile menu */}
         {isOpen && <div className="md:hidden py-6 space-y-4 border-t border-border animate-slide-up">
-            {menuItems.map(item => <a key={item.label} href={item.href} onClick={() => setIsOpen(false)} className="block text-sm font-medium text-muted-foreground hover:text-primary transition-colors py-2">
+            {menuItems.map(item => (
+              <button 
+                key={item.label} 
+                onClick={() => handleMenuClick(item.href)} 
+                className="block w-full text-left text-sm font-medium text-muted-foreground hover:text-primary transition-colors py-2"
+              >
                 {item.label}
-              </a>)}
+              </button>
+            ))}
             
-            <Button
-              variant="ghost"
-              onClick={() => {
-                navigate('/shop');
-                setIsOpen(false);
-              }}
-              className="w-full justify-center relative"
-            >
-              <ShoppingCart className="h-5 w-5 mr-2" />
-              {t('shopCart')}
-              {totalItems > 0 && (
-                <Badge className="ml-2 h-5 w-5 flex items-center justify-center p-0 text-xs">
+            {totalItems > 0 && (
+              <Button
+                variant="ghost"
+                onClick={() => {
+                  navigate('/checkout');
+                  setIsOpen(false);
+                }}
+                className="w-full justify-center relative"
+              >
+                <ShoppingCart className="h-5 w-5 mr-2" />
+                {t('shopCart')}
+                <Badge className="ml-2 h-5 w-5 flex items-center justify-center p-0 text-xs animate-pulse">
                   {totalItems}
                 </Badge>
-              )}
-            </Button>
+              </Button>
+            )}
             
             <div className="flex items-center justify-center gap-4 pt-2">
               <ThemeSwitcher />
