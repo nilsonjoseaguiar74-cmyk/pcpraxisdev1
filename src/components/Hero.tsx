@@ -1,35 +1,16 @@
 import { Button } from "@/components/ui/button";
 import { Monitor, Cpu, Wrench } from "lucide-react";
-import { useEffect, useState } from "react";
 import { DecodeText } from "./DecodeText";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { CosmosBackground } from "./CosmosBackground";
 
 export const Hero = () => {
   const { t } = useLanguage();
-  const [scrollY, setScrollY] = useState(0);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrollY(window.scrollY);
-    };
-
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-hero pt-20 md:pt-24 pb-16 md:pb-20">
-      {/* Animated background elements with parallax */}
-      <div className="absolute inset-0 opacity-10">
-        <div 
-          className="absolute top-1/4 left-1/4 w-72 h-72 md:w-96 md:h-96 bg-foreground/30 rounded-full blur-3xl animate-glow-pulse transition-transform duration-100 ease-out" 
-          style={{ transform: `translate(${scrollY * 0.3}px, ${scrollY * 0.2}px)` }}
-        />
-        <div 
-          className="absolute bottom-1/4 right-1/4 w-72 h-72 md:w-96 md:h-96 bg-accent/30 rounded-full blur-3xl animate-glow-pulse transition-transform duration-100 ease-out" 
-          style={{ animationDelay: '1.5s', transform: `translate(-${scrollY * 0.4}px, ${scrollY * 0.15}px)` }}
-        />
-      </div>
+      {/* Cosmos background */}
+      <CosmosBackground />
 
       <div className="container relative z-10 px-4 sm:px-6 lg:px-8 py-8 md:py-12">
         <div className="max-w-5xl mx-auto text-center space-y-6 sm:space-y-8 md:space-y-10">

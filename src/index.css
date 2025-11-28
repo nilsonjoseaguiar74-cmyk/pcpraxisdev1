@@ -254,6 +254,38 @@ All colors MUST be HSL.
     }
   }
 
+  @keyframes splash-logo {
+    0% {
+      transform: scale(1.2);
+      opacity: 0;
+    }
+    50% {
+      transform: scale(1);
+      opacity: 1;
+    }
+    100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+
+  @keyframes fade-out {
+    from {
+      opacity: 1;
+    }
+    to {
+      opacity: 0;
+    }
+  }
+
+  .animate-splash-logo {
+    animation: splash-logo 2s ease-out forwards;
+  }
+
+  .animate-fade-out {
+    animation: fade-out 0.3s ease-out forwards;
+  }
+
   /* Cyberpunk interactive effects - only active in cyberpunk theme */
   .theme-cyberpunk button:not(:disabled):hover {
     transform: scale(1.02);
