@@ -2,6 +2,12 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { useState, useEffect } from "react";
 import flagDE from "@/assets/flag-de.svg";
 import flagUS from "@/assets/flag-us.png";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 export const FloatingLanguageSwitcher = () => {
   const { language, setLanguage } = useLanguage();
@@ -41,40 +47,54 @@ export const FloatingLanguageSwitcher = () => {
   }, [isHovered]);
 
   return (
-    <div 
-      className={`fixed bottom-24 left-6 z-40 flex flex-col gap-2 transition-all duration-500 ${
-        isVisible ? 'opacity-100' : 'opacity-0 pointer-events-none'
-      }`}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-    >
-      <button
-        onClick={() => setLanguage('de')}
-        className={`w-6 h-4 rounded-md flex items-center justify-center overflow-hidden transition-all duration-300 shadow-sm ${
-          language === 'de'
-            ? 'ring-1 ring-muted-foreground/30 scale-105 opacity-100'
-            : 'opacity-40 hover:opacity-70'
-        } ${isHovered ? 'scale-110' : ''}`}
-        style={{ borderColor: '#888' }}
-        aria-label="Deutsch"
-        title="Deutsch"
+    <TooltipProvider delayDuration={300}>
+      <div 
+        className={`fixed bottom-24 left-6 z-40 flex flex-col gap-2 transition-all duration-500 ${
+          isVisible ? 'opacity-100' : 'opacity-0 pointer-events-none'
+        }`}
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
       >
-        <img src={flagDE} alt="DE" className="w-full h-full object-cover" />
-      </button>
-      
-      <button
-        onClick={() => setLanguage('en')}
-        className={`w-6 h-4 rounded-md flex items-center justify-center overflow-hidden transition-all duration-300 shadow-sm ${
-          language === 'en'
-            ? 'ring-1 ring-muted-foreground/30 scale-105 opacity-100'
-            : 'opacity-40 hover:opacity-70'
-        } ${isHovered ? 'scale-110' : ''}`}
-        style={{ borderColor: '#888' }}
-        aria-label="English"
-        title="English"
-      >
-        <img src={flagUS} alt="EN" className="w-full h-full object-cover" />
-      </button>
-    </div>
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <button
+              onClick={() => setLanguage('de')}
+              className={`w-6 h-4 rounded-md flex items-center justify-center overflow-hidden transition-all duration-300 shadow-sm ${
+                language === 'de'
+                  ? 'ring-1 ring-muted-foreground/30 scale-105 opacity-100'
+                  : 'opacity-40 hover:opacity-70'
+              } ${isHovered ? 'scale-110' : ''}`}
+              style={{ borderColor: '#888' }}
+              aria-label="Deutsch"
+            >
+              <img src={flagDE} alt="DE" className="w-full h-full object-cover" />
+            </button>
+          </TooltipTrigger>
+          <TooltipContent side="right">
+            <p>Deutsch</p>
+          </TooltipContent>
+        </Tooltip>
+        
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <button
+              onClick={() => setLanguage('en')}
+              className={`w-6 h-4 rounded-md flex items-center justify-center overflow-hidden transition-all duration-300 shadow-sm ${
+                language === 'en'
+                  ? 'ring-1 ring-muted-foreground/30 scale-105 opacity-100'
+                  : 'opacity-40 hover:opacity-70'
+              } ${isHovered ? 'scale-110' : ''}`}
+              style={{ borderColor: '#888' }}
+              aria-label="English"
+            >
+              <img src={flagUS} alt="EN" className="w-full h-full object-cover" />
+            </button>
+          </TooltipTrigger>
+          <TooltipContent side="right">
+            <p>English</p>
+          </TooltipContent>
+        </Tooltip>
+      </div>
+    </TooltipProvider>
   );
 };
