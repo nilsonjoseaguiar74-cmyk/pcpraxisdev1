@@ -42,7 +42,7 @@ export const FloatingLanguageSwitcher = () => {
 
   return (
     <div 
-      className={`fixed bottom-6 left-6 z-40 flex flex-col gap-1 transition-all duration-500 ${
+      className={`fixed bottom-24 left-6 z-40 flex flex-col gap-2 transition-all duration-500 ${
         isVisible ? 'opacity-100' : 'opacity-0 pointer-events-none'
       }`}
       onMouseEnter={() => setIsHovered(true)}
@@ -50,11 +50,11 @@ export const FloatingLanguageSwitcher = () => {
     >
       <button
         onClick={() => setLanguage('de')}
-        className={`w-6 h-6 rounded-full flex items-center justify-center overflow-hidden transition-all duration-300 shadow-sm border opacity-75 ${
+        className={`w-12 h-8 rounded-md flex items-center justify-center overflow-hidden transition-all duration-300 shadow-md border bg-card/50 backdrop-blur-sm ${
           language === 'de'
-            ? 'ring-1 ring-primary scale-110'
-            : 'opacity-30 hover:opacity-60'
-        } ${isHovered ? 'scale-125' : ''}`}
+            ? 'ring-2 ring-primary scale-105 opacity-100'
+            : 'opacity-50 hover:opacity-80'
+        } ${isHovered ? 'scale-110' : ''}`}
         aria-label="Deutsch"
         title="Deutsch"
       >
@@ -63,11 +63,11 @@ export const FloatingLanguageSwitcher = () => {
       
       <button
         onClick={() => setLanguage('en')}
-        className={`w-6 h-6 rounded-full flex items-center justify-center overflow-hidden transition-all duration-300 shadow-sm border opacity-75 ${
+        className={`w-12 h-8 rounded-md flex items-center justify-center overflow-hidden transition-all duration-300 shadow-md border bg-card/50 backdrop-blur-sm ${
           language === 'en'
-            ? 'ring-1 ring-primary scale-110'
-            : 'opacity-30 hover:opacity-60'
-        } ${isHovered ? 'scale-125' : ''}`}
+            ? 'ring-2 ring-primary scale-105 opacity-100'
+            : 'opacity-50 hover:opacity-80'
+        } ${isHovered ? 'scale-110' : ''}`}
         aria-label="English"
         title="English"
       >
