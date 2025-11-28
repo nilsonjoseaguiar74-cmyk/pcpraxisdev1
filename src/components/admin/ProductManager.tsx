@@ -58,15 +58,15 @@ export const ProductManager = () => {
       const outOfStockProducts = (data || []).filter(p => p.quantity === 0);
       
       if (lowStockProducts.length > 0) {
-        toast.warning(`${t('adminLowStock')}: ${lowStockProducts.length} ${lowStockProducts.length === 1 ? 'produto' : 'produtos'}`);
+        toast.warning(`${t('adminLowStock')}: ${lowStockProducts.length} ${lowStockProducts.length === 1 ? t('adminProductSingular') : t('adminProductPlural')}`);
       }
       
       if (outOfStockProducts.length > 0) {
-        toast.error(`Sem estoque: ${outOfStockProducts.length} ${outOfStockProducts.length === 1 ? 'produto' : 'produtos'}`);
+        toast.error(`${t('adminOutOfStockAlert')} ${outOfStockProducts.length} ${outOfStockProducts.length === 1 ? t('adminProductSingular') : t('adminProductPlural')}`);
       }
     } catch (error) {
       console.error('Error fetching products:', error);
-      toast.error('Erro ao carregar produtos');
+      toast.error(t('adminProductLoadError'));
     } finally {
       setLoading(false);
     }
@@ -93,7 +93,7 @@ export const ProductManager = () => {
           .eq('id', editingProduct.id);
 
         if (error) throw error;
-        toast.success('Produto atualizado com sucesso!');
+        toast.success(t('adminProductUpdated'));
         
         // Check if stock is low after update
         if (productData.quantity <= 5 && productData.quantity > 0) {
@@ -105,7 +105,7 @@ export const ProductManager = () => {
           .insert([productData]);
 
         if (error) throw error;
-        toast.success('Produto criado com sucesso!');
+        toast.success(t('adminProductCreated'));
       }
 
       setDialogOpen(false);
@@ -113,12 +113,12 @@ export const ProductManager = () => {
       fetchProducts();
     } catch (error: any) {
       console.error('Error saving product:', error);
-      toast.error(error.message || 'Erro ao salvar produto');
+      toast.error(error.message || t('adminProductError'));
     }
   };
 
   const handleDelete = async (id: string) => {
-    if (!confirm('Tem certeza que deseja excluir este produto?')) return;
+    if (!confirm(t('adminProductDeleteConfirm'))) return;
 
     try {
       const { error } = await supabase
@@ -127,11 +127,11 @@ export const ProductManager = () => {
         .eq('id', id);
 
       if (error) throw error;
-      toast.success('Produto excluído com sucesso!');
+      toast.success(t('adminProductDeleted'));
       fetchProducts();
     } catch (error: any) {
       console.error('Error deleting product:', error);
-      toast.error(error.message || 'Erro ao excluir produto');
+      toast.error(error.message || t('adminProductDeleteError'));
     }
   };
 
@@ -163,7 +163,7 @@ export const ProductManager = () => {
   };
 
   if (loading) {
-    return <div className="text-center py-8">Carregando produtos...</div>;
+    return <div className="text-center py-8">{t('adminLoadingProducts')}</div>;
   }
 
   const getStockBadge = (quantity: number) => {
@@ -171,7 +171,7 @@ export const ProductManager = () => {
       return (
         <Badge variant="destructive" className="gap-1">
           <AlertTriangle className="h-3 w-3" />
-          Sem estoque
+          {t('adminOutOfStock')}
         </Badge>
       );
     } else if (quantity <= 5) {
@@ -191,7 +191,7 @@ export const ProductManager = () => {
         <div className="flex justify-between items-center">
           <div>
             <CardTitle>{t('adminProducts')}</CardTitle>
-            <CardDescription>Adicione, edite ou remova produtos do estoque</CardDescription>
+            <CardDescription>{t('adminProductsDescription')}</CardDescription>
           </div>
           <Dialog open={dialogOpen} onOpenChange={(open) => { setDialogOpen(open); if (!open) resetForm(); }}>
             <DialogTrigger asChild>
@@ -204,7 +204,7 @@ export const ProductManager = () => {
               <DialogHeader>
                 <DialogTitle>{editingProduct ? t('adminEditProduct') : t('adminAddProduct')}</DialogTitle>
                 <DialogDescription>
-                  Preencha os dados do produto abaixo
+                  {t('adminProductFormDescription')}
                 </DialogDescription>
               </DialogHeader>
               <form onSubmit={handleSubmit} className="space-y-4">
@@ -313,7 +313,7 @@ export const ProductManager = () => {
               {products.length === 0 ? (
                 <TableRow>
                   <TableCell colSpan={6} className="text-center text-muted-foreground">
-                    Nenhum produto cadastrado
+                    {t('adminNoProducts')}
                   </TableCell>
                 </TableRow>
               ) : (
