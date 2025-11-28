@@ -71,15 +71,15 @@ export const Hero = () => {
           <div className="grid grid-cols-3 gap-4 sm:gap-8 pt-8 md:pt-12 max-w-3xl mx-auto animate-fade-in px-4" style={{ animationDelay: '0.9s' }}>
             <div className="space-y-2 p-4 rounded-lg hover:bg-card/50 transition-all duration-300 cursor-pointer group">
               <div className="text-2xl sm:text-3xl md:text-4xl font-tech font-bold text-foreground group-hover:scale-110 transition-transform">500+</div>
-              <div className="text-xs sm:text-sm text-muted-foreground">Zufriedene Kunden</div>
+              <div className="text-xs sm:text-sm text-muted-foreground">{t('heroStatClients')}</div>
             </div>
             <div className="space-y-2 p-4 rounded-lg hover:bg-card/50 transition-all duration-300 cursor-pointer group">
               <div className="text-2xl sm:text-3xl md:text-4xl font-tech font-bold text-foreground group-hover:scale-110 transition-transform">100%</div>
-              <div className="text-xs sm:text-sm text-muted-foreground">Qualitätsgarantie</div>
+              <div className="text-xs sm:text-sm text-muted-foreground">{t('heroStatQuality')}</div>
             </div>
             <div className="space-y-2 p-4 rounded-lg hover:bg-card/50 transition-all duration-300 cursor-pointer group">
               <div className="text-2xl sm:text-3xl md:text-4xl font-tech font-bold text-foreground group-hover:scale-110 transition-transform">24/7</div>
-              <div className="text-xs sm:text-sm text-muted-foreground">Support</div>
+              <div className="text-xs sm:text-sm text-muted-foreground">{t('heroStatSupport')}</div>
             </div>
           </div>
         </div>
