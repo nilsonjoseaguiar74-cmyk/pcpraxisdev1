@@ -8,6 +8,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { z } from 'zod';
+import { ArrowLeft } from 'lucide-react';
 
 const emailSchema = z.string().email('Email inválido').max(255);
 const passwordSchema = z.string().min(6, 'Senha deve ter no mínimo 6 caracteres').max(100);
@@ -101,26 +102,35 @@ const Auth = () => {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-background via-background to-primary/5 p-4">
+      <Button
+        variant="ghost"
+        onClick={() => navigate('/')}
+        className="absolute top-4 left-4 gap-2"
+      >
+        <ArrowLeft className="h-4 w-4" />
+        {t('backToHome')}
+      </Button>
+      
       <Card className="w-full max-w-md shadow-xl">
         <CardHeader className="space-y-1">
           <CardTitle className="text-2xl font-bold text-center">
             PC Praxis
           </CardTitle>
           <CardDescription className="text-center">
-            Sistema de Autenticação
+            {t('authSignIn')} / {t('authSignUp')}
           </CardDescription>
         </CardHeader>
         <CardContent>
           <Tabs defaultValue="signin" className="w-full">
             <TabsList className="grid w-full grid-cols-2">
-              <TabsTrigger value="signin">Login</TabsTrigger>
-              <TabsTrigger value="signup">Criar Conta</TabsTrigger>
+              <TabsTrigger value="signin">{t('authSignIn')}</TabsTrigger>
+              <TabsTrigger value="signup">{t('authSignUp')}</TabsTrigger>
             </TabsList>
 
             <TabsContent value="signin">
               <form onSubmit={handleSignIn} className="space-y-4 mt-4">
                 <div className="space-y-2">
-                  <Label htmlFor="signin-email">Email</Label>
+                  <Label htmlFor="signin-email">{t('authEmail')}</Label>
                   <Input
                     id="signin-email"
                     type="email"
@@ -136,7 +146,7 @@ const Auth = () => {
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="signin-password">Senha</Label>
+                  <Label htmlFor="signin-password">{t('authPassword')}</Label>
                   <Input
                     id="signin-password"
                     type="password"
@@ -152,7 +162,7 @@ const Auth = () => {
                 </div>
 
                 <Button type="submit" className="w-full" disabled={isLoading}>
-                  {isLoading ? 'Entrando...' : 'Entrar'}
+                  {isLoading ? 'Entrando...' : t('authSignInButton')}
                 </Button>
               </form>
             </TabsContent>
@@ -160,7 +170,7 @@ const Auth = () => {
             <TabsContent value="signup">
               <form onSubmit={handleSignUp} className="space-y-4 mt-4">
                 <div className="space-y-2">
-                  <Label htmlFor="signup-name">Nome Completo</Label>
+                  <Label htmlFor="signup-name">{t('authFullName')}</Label>
                   <Input
                     id="signup-name"
                     type="text"
@@ -176,7 +186,7 @@ const Auth = () => {
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="signup-email">Email</Label>
+                  <Label htmlFor="signup-email">{t('authEmail')}</Label>
                   <Input
                     id="signup-email"
                     type="email"
@@ -192,7 +202,7 @@ const Auth = () => {
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="signup-password">Senha</Label>
+                  <Label htmlFor="signup-password">{t('authPassword')}</Label>
                   <Input
                     id="signup-password"
                     type="password"
@@ -208,7 +218,7 @@ const Auth = () => {
                 </div>
 
                 <Button type="submit" className="w-full" disabled={isLoading}>
-                  {isLoading ? 'Criando conta...' : 'Criar Conta'}
+                  {isLoading ? 'Criando conta...' : t('authSignUpButton')}
                 </Button>
               </form>
             </TabsContent>

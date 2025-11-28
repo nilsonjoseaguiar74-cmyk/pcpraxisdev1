@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { supabase } from '@/integrations/supabase/client';
+import { useLanguage } from '@/contexts/LanguageContext';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -7,8 +8,9 @@ import { Textarea } from '@/components/ui/textarea';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
+import { Badge } from '@/components/ui/badge';
 import { toast } from 'sonner';
-import { Plus, Edit, Trash2 } from 'lucide-react';
+import { Plus, Edit, Trash2, AlertTriangle } from 'lucide-react';
 
 interface Product {
   id: string;
@@ -22,6 +24,7 @@ interface Product {
 }
 
 export const ProductManager = () => {
+  const { t } = useLanguage();
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
   const [dialogOpen, setDialogOpen] = useState(false);
@@ -49,6 +52,18 @@ export const ProductManager = () => {
 
       if (error) throw error;
       setProducts(data || []);
+      
+      // Check for low stock and notify
+      const lowStockProducts = (data || []).filter(p => p.quantity > 0 && p.quantity <= 5);
+      const outOfStockProducts = (data || []).filter(p => p.quantity === 0);
+      
+      if (lowStockProducts.length > 0) {
+        toast.warning(`${t('adminLowStock')}: ${lowStockProducts.length} ${lowStockProducts.length === 1 ? 'produto' : 'produtos'}`);
+      }
+      
+      if (outOfStockProducts.length > 0) {
+        toast.error(`Sem estoque: ${outOfStockProducts.length} ${outOfStockProducts.length === 1 ? 'produto' : 'produtos'}`);
+      }
     } catch (error) {
       console.error('Error fetching products:', error);
       toast.error('Erro ao carregar produtos');
@@ -79,6 +94,11 @@ export const ProductManager = () => {
 
         if (error) throw error;
         toast.success('Produto atualizado com sucesso!');
+        
+        // Check if stock is low after update
+        if (productData.quantity <= 5 && productData.quantity > 0) {
+          toast.warning(`${t('adminStockAlert')}: ${productData.name}`);
+        }
       } else {
         const { error } = await supabase
           .from('products')
@@ -146,24 +166,43 @@ export const ProductManager = () => {
     return <div className="text-center py-8">Carregando produtos...</div>;
   }
 
+  const getStockBadge = (quantity: number) => {
+    if (quantity === 0) {
+      return (
+        <Badge variant="destructive" className="gap-1">
+          <AlertTriangle className="h-3 w-3" />
+          Sem estoque
+        </Badge>
+      );
+    } else if (quantity <= 5) {
+      return (
+        <Badge variant="secondary" className="gap-1 bg-yellow-500/20 text-yellow-700 dark:text-yellow-400">
+          <AlertTriangle className="h-3 w-3" />
+          {t('adminLowStock')}
+        </Badge>
+      );
+    }
+    return null;
+  };
+
   return (
     <Card>
       <CardHeader>
         <div className="flex justify-between items-center">
           <div>
-            <CardTitle>Gestão de Produtos</CardTitle>
+            <CardTitle>{t('adminProducts')}</CardTitle>
             <CardDescription>Adicione, edite ou remova produtos do estoque</CardDescription>
           </div>
           <Dialog open={dialogOpen} onOpenChange={(open) => { setDialogOpen(open); if (!open) resetForm(); }}>
             <DialogTrigger asChild>
               <Button>
                 <Plus className="mr-2 h-4 w-4" />
-                Novo Produto
+                {t('adminAddProduct')}
               </Button>
             </DialogTrigger>
             <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
               <DialogHeader>
-                <DialogTitle>{editingProduct ? 'Editar Produto' : 'Novo Produto'}</DialogTitle>
+                <DialogTitle>{editingProduct ? t('adminEditProduct') : t('adminAddProduct')}</DialogTitle>
                 <DialogDescription>
                   Preencha os dados do produto abaixo
                 </DialogDescription>
@@ -171,7 +210,7 @@ export const ProductManager = () => {
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div className="grid grid-cols-2 gap-4">
                   <div className="space-y-2">
-                    <Label htmlFor="name">Nome *</Label>
+                    <Label htmlFor="name">{t('adminName')} *</Label>
                     <Input
                       id="name"
                       value={formData.name}
@@ -180,7 +219,7 @@ export const ProductManager = () => {
                     />
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="part_number">Número da Peça *</Label>
+                    <Label htmlFor="part_number">{t('adminPartNumber')} *</Label>
                     <Input
                       id="part_number"
                       value={formData.part_number}
@@ -191,7 +230,7 @@ export const ProductManager = () => {
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="description">Descrição</Label>
+                  <Label htmlFor="description">{t('adminDescription')}</Label>
                   <Textarea
                     id="description"
                     value={formData.description}
@@ -202,7 +241,7 @@ export const ProductManager = () => {
 
                 <div className="grid grid-cols-3 gap-4">
                   <div className="space-y-2">
-                    <Label htmlFor="price">Preço (€) *</Label>
+                    <Label htmlFor="price">{t('adminPrice')} (€) *</Label>
                     <Input
                       id="price"
                       type="number"
@@ -214,7 +253,7 @@ export const ProductManager = () => {
                     />
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="quantity">Quantidade *</Label>
+                    <Label htmlFor="quantity">{t('adminQuantity')} *</Label>
                     <Input
                       id="quantity"
                       type="number"
@@ -225,7 +264,7 @@ export const ProductManager = () => {
                     />
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="category">Categoria</Label>
+                    <Label htmlFor="category">{t('adminCategory')}</Label>
                     <Input
                       id="category"
                       value={formData.category}
@@ -235,7 +274,7 @@ export const ProductManager = () => {
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="image_url">URL da Imagem</Label>
+                  <Label htmlFor="image_url">{t('adminImageUrl')}</Label>
                   <Input
                     id="image_url"
                     type="url"
@@ -246,10 +285,10 @@ export const ProductManager = () => {
 
                 <div className="flex justify-end gap-2">
                   <Button type="button" variant="outline" onClick={() => { setDialogOpen(false); resetForm(); }}>
-                    Cancelar
+                    {t('adminCancel')}
                   </Button>
                   <Button type="submit">
-                    {editingProduct ? 'Atualizar' : 'Criar'} Produto
+                    {t('adminSave')}
                   </Button>
                 </div>
               </form>
@@ -262,12 +301,12 @@ export const ProductManager = () => {
           <Table>
             <TableHeader>
               <TableRow>
-                <TableHead>Nome</TableHead>
-                <TableHead>Nº Peça</TableHead>
-                <TableHead>Preço</TableHead>
-                <TableHead>Quantidade</TableHead>
-                <TableHead>Categoria</TableHead>
-                <TableHead className="text-right">Ações</TableHead>
+                <TableHead>{t('adminName')}</TableHead>
+                <TableHead>{t('adminPartNumber')}</TableHead>
+                <TableHead>{t('adminPrice')}</TableHead>
+                <TableHead>{t('adminQuantity')}</TableHead>
+                <TableHead>{t('adminCategory')}</TableHead>
+                <TableHead className="text-right">{t('adminActions')}</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -280,10 +319,19 @@ export const ProductManager = () => {
               ) : (
                 products.map((product) => (
                   <TableRow key={product.id}>
-                    <TableCell className="font-medium">{product.name}</TableCell>
+                    <TableCell className="font-medium">
+                      <div className="flex items-center gap-2">
+                        {product.name}
+                        {getStockBadge(product.quantity)}
+                      </div>
+                    </TableCell>
                     <TableCell>{product.part_number}</TableCell>
                     <TableCell>€{product.price.toFixed(2)}</TableCell>
-                    <TableCell>{product.quantity}</TableCell>
+                    <TableCell>
+                      <span className={product.quantity === 0 ? 'text-destructive font-bold' : product.quantity <= 5 ? 'text-yellow-600 dark:text-yellow-400 font-semibold' : ''}>
+                        {product.quantity}
+                      </span>
+                    </TableCell>
                     <TableCell>{product.category || '-'}</TableCell>
                     <TableCell className="text-right">
                       <Button
