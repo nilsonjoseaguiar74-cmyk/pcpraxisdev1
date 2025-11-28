@@ -50,7 +50,7 @@ export const FloatingLanguageSwitcher = () => {
     >
       <button
         onClick={() => setLanguage('de')}
-        className={`w-12 h-8 rounded-md flex items-center justify-center overflow-hidden transition-all duration-300 shadow-md border bg-card/50 backdrop-blur-sm ${
+        className={`w-6 h-4 rounded-md flex items-center justify-center overflow-hidden transition-all duration-300 shadow-md border bg-card/50 backdrop-blur-sm ${
           language === 'de'
             ? 'ring-2 ring-primary scale-105 opacity-100'
             : 'opacity-50 hover:opacity-80'
@@ -63,7 +63,7 @@ export const FloatingLanguageSwitcher = () => {
       
       <button
         onClick={() => setLanguage('en')}
-        className={`w-12 h-8 rounded-md flex items-center justify-center overflow-hidden transition-all duration-300 shadow-md border bg-card/50 backdrop-blur-sm ${
+        className={`w-6 h-4 rounded-md flex items-center justify-center overflow-hidden transition-all duration-300 shadow-md border bg-card/50 backdrop-blur-sm ${
           language === 'en'
             ? 'ring-2 ring-primary scale-105 opacity-100'
             : 'opacity-50 hover:opacity-80'
