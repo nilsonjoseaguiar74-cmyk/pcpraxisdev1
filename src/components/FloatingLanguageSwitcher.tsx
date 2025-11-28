@@ -1,7 +1,7 @@
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useState, useEffect } from "react";
 import flagDE from "@/assets/flag-de.svg";
-import flagUS from "@/assets/flag-us.svg";
+import flagUS from "@/assets/flag-us.png";
 
 export const FloatingLanguageSwitcher = () => {
   const { language, setLanguage } = useLanguage();
@@ -52,8 +52,8 @@ export const FloatingLanguageSwitcher = () => {
         onClick={() => setLanguage('de')}
         className={`w-6 h-4 rounded-md flex items-center justify-center overflow-hidden transition-all duration-300 shadow-md border bg-card/50 backdrop-blur-sm ${
           language === 'de'
-            ? 'ring-2 ring-primary scale-105 opacity-100'
-            : 'opacity-50 hover:opacity-80'
+            ? 'ring-1 ring-primary/60 scale-105 opacity-100'
+            : 'opacity-40 hover:opacity-70'
         } ${isHovered ? 'scale-110' : ''}`}
         aria-label="Deutsch"
         title="Deutsch"
@@ -65,8 +65,8 @@ export const FloatingLanguageSwitcher = () => {
         onClick={() => setLanguage('en')}
         className={`w-6 h-4 rounded-md flex items-center justify-center overflow-hidden transition-all duration-300 shadow-md border bg-card/50 backdrop-blur-sm ${
           language === 'en'
-            ? 'ring-2 ring-primary scale-105 opacity-100'
-            : 'opacity-50 hover:opacity-80'
+            ? 'ring-1 ring-primary/60 scale-105 opacity-100'
+            : 'opacity-40 hover:opacity-70'
         } ${isHovered ? 'scale-110' : ''}`}
         aria-label="English"
         title="English"
