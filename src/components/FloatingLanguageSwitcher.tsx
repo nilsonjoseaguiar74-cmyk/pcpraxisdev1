@@ -50,10 +50,10 @@ export const FloatingLanguageSwitcher = () => {
     >
       <button
         onClick={() => setLanguage('de')}
-        className={`w-7 h-7 rounded-full flex items-center justify-center overflow-hidden transition-all duration-300 shadow-sm border ${
+        className={`w-6 h-6 rounded-full flex items-center justify-center overflow-hidden transition-all duration-300 shadow-sm border opacity-75 ${
           language === 'de'
-            ? 'ring-2 ring-primary scale-110'
-            : 'opacity-40 hover:opacity-80'
+            ? 'ring-1 ring-primary scale-110'
+            : 'opacity-30 hover:opacity-60'
         } ${isHovered ? 'scale-125' : ''}`}
         aria-label="Deutsch"
         title="Deutsch"
@@ -63,10 +63,10 @@ export const FloatingLanguageSwitcher = () => {
       
       <button
         onClick={() => setLanguage('en')}
-        className={`w-7 h-7 rounded-full flex items-center justify-center overflow-hidden transition-all duration-300 shadow-sm border ${
+        className={`w-6 h-6 rounded-full flex items-center justify-center overflow-hidden transition-all duration-300 shadow-sm border opacity-75 ${
           language === 'en'
-            ? 'ring-2 ring-primary scale-110'
-            : 'opacity-40 hover:opacity-80'
+            ? 'ring-1 ring-primary scale-110'
+            : 'opacity-30 hover:opacity-60'
         } ${isHovered ? 'scale-125' : ''}`}
         aria-label="English"
         title="English"
