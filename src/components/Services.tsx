@@ -1,29 +1,46 @@
 import { Card } from "@/components/ui/card";
 import { Monitor, Cpu, Wrench, ShoppingCart, Zap, Shield } from "lucide-react";
 import { Button } from "@/components/ui/button";
-
-const services = [
-  {
-    icon: Monitor,
-    title: "PC Konfigurator",
-    description: "Stellen Sie Ihren individuellen PC zusammen. Alle Komponenten werden auf Kompatibilität geprüft und optimal aufeinander abgestimmt.",
-    features: ["Gaming PCs", "Workstations", "Office PCs", "Server-Systeme"],
-  },
-  {
-    icon: ShoppingCart,
-    title: "Hardware Shop",
-    description: "Große Auswahl an Premium-Komponenten und fertigen Systemen zu fairen Preisen mit Bestpreisgarantie.",
-    features: ["Neueste Hardware", "Faire Preise", "Express-Lieferung", "Garantie"],
-  },
-  {
-    icon: Wrench,
-    title: "Service & Wartung",
-    description: "Professionelle Reparatur, Wartung und Upgrade-Service für alle PC-Systeme mit Protokoll-Tracking.",
-    features: ["Reparatur-Service", "Upgrades", "Reinigung", "Diagnose"],
-  },
-];
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export const Services = () => {
+  const { t } = useLanguage();
+
+  const services = [
+    {
+      icon: Monitor,
+      title: t('servicePcConfigurator'),
+      description: t('servicePcConfiguratorDesc'),
+      features: [
+        t('serviceFeatureGamingPCs'),
+        t('serviceFeatureWorkstations'),
+        t('serviceFeatureOfficePCs'),
+        t('serviceFeatureServerSystems')
+      ],
+    },
+    {
+      icon: ShoppingCart,
+      title: t('serviceHardwareShop'),
+      description: t('serviceHardwareShopDesc'),
+      features: [
+        t('serviceFeatureLatestHardware'),
+        t('serviceFeatureFairPrices'),
+        t('serviceFeatureExpressDelivery'),
+        t('serviceFeatureWarranty')
+      ],
+    },
+    {
+      icon: Wrench,
+      title: t('serviceServiceMaintenance'),
+      description: t('serviceServiceMaintenanceDesc'),
+      features: [
+        t('serviceFeatureRepairService'),
+        t('serviceFeatureUpgrades'),
+        t('serviceFeatureCleaning'),
+        t('serviceFeatureDiagnostics')
+      ],
+    },
+  ];
   return (
     <section className="py-12 md:py-16 lg:py-20 relative" id="services">
       <div className="container px-4 sm:px-6 lg:px-8">
@@ -32,15 +49,15 @@ export const Services = () => {
           <div className="inline-flex items-center gap-3 mb-2">
             <div className="h-px w-8 bg-gradient-to-r from-transparent via-primary/50 to-primary" />
             <span className="text-xs sm:text-sm font-medium text-primary uppercase tracking-wider">
-              Privat & Business
+              {t('privatBusiness')}
             </span>
             <div className="h-px w-8 bg-gradient-to-l from-transparent via-primary/50 to-primary" />
           </div>
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-tech font-bold leading-tight">
-            Unsere <span className="text-primary">Services</span>
+            {t('servicesTitle').split(' ')[0]} <span className="text-primary">{t('servicesTitle').split(' ')[1]}</span>
           </h2>
           <p className="text-base md:text-lg text-muted-foreground px-4">
-            Von der Beratung bis zur Wartung – alles aus einer Hand
+            {t('servicesAllInOne')}
           </p>
         </div>
 
@@ -81,7 +98,7 @@ export const Services = () => {
 
                 {/* CTA */}
                 <Button variant="outline" className="w-full group-hover:border-primary group-hover:text-primary group-hover:bg-primary/5 transition-all">
-                  Mehr erfahren
+                  {t('serviceLearnMore')}
                 </Button>
               </div>
             </Card>
@@ -92,15 +109,15 @@ export const Services = () => {
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 max-w-5xl mx-auto">
           <div className="flex items-center gap-3 p-4 md:p-5 rounded-lg bg-card border border-border hover:border-primary/30 hover:shadow-sm transition-all duration-300 cursor-pointer group">
             <Zap className="w-5 h-5 text-primary flex-shrink-0 group-hover:scale-110 transition-transform" />
-            <span className="text-sm md:text-base font-medium">Schnelle Lieferung</span>
+            <span className="text-sm md:text-base font-medium">{t('serviceFastDelivery')}</span>
           </div>
           <div className="flex items-center gap-3 p-4 md:p-5 rounded-lg bg-card border border-border hover:border-primary/30 hover:shadow-sm transition-all duration-300 cursor-pointer group">
             <Shield className="w-5 h-5 text-primary flex-shrink-0 group-hover:scale-110 transition-transform" />
-            <span className="text-sm md:text-base font-medium">GDPR-konform</span>
+            <span className="text-sm md:text-base font-medium">{t('serviceGDPRCompliant')}</span>
           </div>
           <div className="flex items-center gap-3 p-4 md:p-5 rounded-lg bg-card border border-border hover:border-primary/30 hover:shadow-sm transition-all duration-300 cursor-pointer group sm:col-span-2 lg:col-span-1">
             <Cpu className="w-5 h-5 text-primary flex-shrink-0 group-hover:scale-110 transition-transform" />
-            <span className="text-sm md:text-base font-medium">Premium-Komponenten</span>
+            <span className="text-sm md:text-base font-medium">{t('servicePremiumComponents')}</span>
           </div>
         </div>
       </div>

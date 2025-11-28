@@ -1,17 +1,19 @@
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Cpu, HardDrive, Zap, Fan, Monitor, Package } from "lucide-react";
-
-const configuratorCategories = [
-  { icon: Cpu, label: "Prozessor", count: "50+", color: "primary" },
-  { icon: HardDrive, label: "Grafikkarte", count: "80+", color: "tech-secondary" },
-  { icon: Zap, label: "RAM", count: "40+", color: "primary" },
-  { icon: Fan, label: "Kühlung", count: "30+", color: "tech-secondary" },
-  { icon: Monitor, label: "Gehäuse", count: "60+", color: "primary" },
-  { icon: Package, label: "Netzteil", count: "35+", color: "tech-secondary" },
-];
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export const Configurator = () => {
+  const { t } = useLanguage();
+
+  const configuratorCategories = [
+    { icon: Cpu, label: t('configuratorProcessor'), count: "50+", color: "primary" },
+    { icon: HardDrive, label: t('configuratorGraphicsCard'), count: "80+", color: "tech-secondary" },
+    { icon: Zap, label: t('configuratorRAM'), count: "40+", color: "primary" },
+    { icon: Fan, label: t('configuratorCooling'), count: "30+", color: "tech-secondary" },
+    { icon: Monitor, label: t('configuratorCase'), count: "60+", color: "primary" },
+    { icon: Package, label: t('configuratorPowerSupply'), count: "35+", color: "tech-secondary" },
+  ];
   return (
     <section className="py-12 md:py-16 lg:py-20 relative bg-gradient-to-b from-background to-card/30" id="configurator">
       <div className="container px-4 sm:px-6 lg:px-8">
@@ -19,16 +21,15 @@ export const Configurator = () => {
         <div className="max-w-3xl mx-auto text-center mb-10 md:mb-12 space-y-4">
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/10 border border-primary/20 animate-fade-in">
             <Cpu className="w-4 h-4 text-primary" />
-            <span className="text-xs sm:text-sm font-medium text-primary">PC Konfigurator</span>
+            <span className="text-xs sm:text-sm font-medium text-primary">{t('configuratorTitle')}</span>
           </div>
           
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-tech font-bold leading-tight px-4">
-            Bauen Sie Ihren <span className="text-primary">Traum-PC</span>
+            {t('configuratorBuildDreamPC').split(' ')[0]} <span className="text-primary">{t('configuratorBuildDreamPC').split(' ').slice(2).join(' ')}</span>
           </h2>
           
           <p className="text-base md:text-lg text-muted-foreground px-4">
-            Unser intelligenter Konfigurator prüft automatisch die Kompatibilität 
-            aller Komponenten und erstellt Ihr individuelles Angebot.
+            {t('configuratorDescription')}
           </p>
         </div>
 
@@ -57,7 +58,7 @@ export const Configurator = () => {
                   </h3>
                   
                   <p className="text-xs md:text-sm text-muted-foreground">
-                    Wählen Sie aus
+                    {t('configuratorChooseFrom')}
                   </p>
                 </div>
               ))}
@@ -68,10 +69,10 @@ export const Configurator = () => {
               <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
                 <div>
                   <h3 className="font-tech text-lg md:text-xl font-semibold mb-1">
-                    Gaming Beast 2024
+                    {t('configuratorExampleBuild')}
                   </h3>
                   <p className="text-xs md:text-sm text-muted-foreground">
-                    High-End Gaming System für 4K @ 144Hz
+                    {t('configuratorExampleDesc')}
                   </p>
                 </div>
                 <div className="text-left sm:text-right">
@@ -79,17 +80,17 @@ export const Configurator = () => {
                     €2.499
                   </div>
                   <div className="text-xs md:text-sm text-muted-foreground">
-                    inkl. MwSt.
+                    {t('configuratorIncludeVAT')}
                   </div>
                 </div>
               </div>
 
               <div className="flex flex-col sm:flex-row gap-3 md:gap-4">
                 <Button variant="hero" size="lg" className="flex-1 group hover:scale-[1.02] transition-transform">
-                  Jetzt konfigurieren
+                  {t('configuratorConfigureNow')}
                 </Button>
                 <Button variant="tech" size="lg" className="flex-1 group hover:scale-[1.02] transition-transform">
-                  Beispiel-Builds ansehen
+                  {t('configuratorViewExamples')}
                 </Button>
               </div>
 
@@ -97,19 +98,19 @@ export const Configurator = () => {
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 md:gap-4 pt-4">
                 <div className="text-center space-y-1 p-3 rounded-lg hover:bg-background/30 transition-colors group cursor-pointer">
                   <div className="text-xl md:text-2xl font-tech font-bold text-primary group-hover:scale-110 transition-transform">✓</div>
-                  <div className="text-xs text-muted-foreground leading-tight">Kompatibilitäts-Check</div>
+                  <div className="text-xs text-muted-foreground leading-tight">{t('configuratorCompatibilityCheck')}</div>
                 </div>
                 <div className="text-center space-y-1 p-3 rounded-lg hover:bg-background/30 transition-colors group cursor-pointer">
                   <div className="text-xl md:text-2xl font-tech font-bold text-primary group-hover:scale-110 transition-transform">✓</div>
-                  <div className="text-xs text-muted-foreground leading-tight">3 Jahre Garantie</div>
+                  <div className="text-xs text-muted-foreground leading-tight">{t('configuratorYearsWarranty')}</div>
                 </div>
                 <div className="text-center space-y-1 p-3 rounded-lg hover:bg-background/30 transition-colors group cursor-pointer">
                   <div className="text-xl md:text-2xl font-tech font-bold text-primary group-hover:scale-110 transition-transform">✓</div>
-                  <div className="text-xs text-muted-foreground leading-tight">Kostenloser Aufbau</div>
+                  <div className="text-xs text-muted-foreground leading-tight">{t('configuratorFreeAssembly')}</div>
                 </div>
                 <div className="text-center space-y-1 p-3 rounded-lg hover:bg-background/30 transition-colors group cursor-pointer">
                   <div className="text-xl md:text-2xl font-tech font-bold text-primary group-hover:scale-110 transition-transform">✓</div>
-                  <div className="text-xs text-muted-foreground leading-tight">Express-Versand</div>
+                  <div className="text-xs text-muted-foreground leading-tight">{t('configuratorExpressShipping')}</div>
                 </div>
               </div>
             </div>
@@ -119,8 +120,7 @@ export const Configurator = () => {
         {/* Protocol info */}
         <div className="max-w-2xl mx-auto mt-12 text-center">
           <p className="text-sm text-muted-foreground">
-            Jede Bestellung erhält eine eindeutige Protokollnummer (Format: PCP-AAAAMMDD-0001) 
-            für lückenlose Nachverfolgung und Service.
+            {t('configuratorProtocolInfo')}
           </p>
         </div>
       </div>

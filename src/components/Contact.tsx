@@ -1,8 +1,11 @@
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Mail, Phone, MapPin, Clock } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export const Contact = () => {
+  const { t } = useLanguage();
+
   return (
     <section className="py-12 md:py-16 lg:py-20 relative" id="contact">
       <div className="container px-4 sm:px-6 lg:px-8">
@@ -12,11 +15,10 @@ export const Contact = () => {
             <div className="space-y-6 md:space-y-8">
               <div className="space-y-3 md:space-y-4">
                 <h2 className="text-2xl sm:text-3xl md:text-4xl font-tech font-bold leading-tight">
-                  Kontaktieren Sie <span className="text-primary">uns</span>
+                  {t('contactUs').split(' ')[0]} <span className="text-primary">{t('contactUs').split(' ')[1]}</span>
                 </h2>
                 <p className="text-base md:text-lg text-muted-foreground">
-                  Haben Sie Fragen oder benötigen Sie Beratung? 
-                  Wir sind gerne für Sie da!
+                  {t('contactQuestion')}
                 </p>
               </div>
 
@@ -27,7 +29,7 @@ export const Contact = () => {
                       <Mail className="w-5 h-5 md:w-6 md:h-6 text-primary" />
                     </div>
                     <div>
-                      <h3 className="font-tech font-semibold mb-1 text-sm md:text-base">E-Mail</h3>
+                      <h3 className="font-tech font-semibold mb-1 text-sm md:text-base">{t('contactEmail')}</h3>
                       <a 
                         href="mailto:info@pcpraxis.at" 
                         className="text-sm md:text-base text-muted-foreground hover:text-primary transition-colors"
@@ -44,7 +46,7 @@ export const Contact = () => {
                       <Phone className="w-5 h-5 md:w-6 md:h-6 text-primary" />
                     </div>
                     <div>
-                      <h3 className="font-tech font-semibold mb-1 text-sm md:text-base">Telefon</h3>
+                      <h3 className="font-tech font-semibold mb-1 text-sm md:text-base">{t('contactPhone')}</h3>
                       <a 
                         href="tel:+43123456789" 
                         className="text-sm md:text-base text-muted-foreground hover:text-primary transition-colors"
@@ -61,7 +63,7 @@ export const Contact = () => {
                       <MapPin className="w-5 h-5 md:w-6 md:h-6 text-primary" />
                     </div>
                     <div>
-                      <h3 className="font-tech font-semibold mb-1 text-sm md:text-base">Adresse</h3>
+                      <h3 className="font-tech font-semibold mb-1 text-sm md:text-base">{t('contactAddress')}</h3>
                       <p className="text-sm md:text-base text-muted-foreground">
                         Musterstraße 123<br />
                         1010 Wien, Österreich
@@ -76,11 +78,11 @@ export const Contact = () => {
                       <Clock className="w-5 h-5 md:w-6 md:h-6 text-primary" />
                     </div>
                     <div>
-                      <h3 className="font-tech font-semibold mb-1 text-sm md:text-base">Öffnungszeiten</h3>
+                      <h3 className="font-tech font-semibold mb-1 text-sm md:text-base">{t('contactOpeningHours')}</h3>
                       <div className="text-muted-foreground space-y-1 text-xs md:text-sm">
-                        <p>Mo-Fr: 09:00 - 18:00</p>
-                        <p>Sa: 10:00 - 14:00</p>
-                        <p className="text-primary font-medium">24/7 Online Support</p>
+                        <p>{t('contactMonFri')}</p>
+                        <p>{t('contactSat')}</p>
+                        <p className="text-primary font-medium">{t('contactOnlineSupport')}</p>
                       </div>
                     </div>
                   </div>
@@ -93,27 +95,26 @@ export const Contact = () => {
               <div className="space-y-6">
                 <div className="space-y-3">
                   <h3 className="text-xl md:text-2xl font-tech font-bold">
-                    Bereit für Ihren neuen PC?
+                    {t('contactReadyForPC')}
                   </h3>
                   <p className="text-sm md:text-base text-muted-foreground leading-relaxed">
-                    Lassen Sie sich unverbindlich beraten oder starten Sie direkt 
-                    mit der Konfiguration Ihres Traum-Systems.
+                    {t('contactLetUsHelp')}
                   </p>
                 </div>
 
                 <div className="space-y-3 md:space-y-4">
                   <Button variant="hero" size="lg" className="w-full hover:scale-[1.02] transition-transform">
-                    Beratungstermin vereinbaren
+                    {t('contactScheduleAppointment')}
                   </Button>
                   <Button variant="tech" size="lg" className="w-full hover:scale-[1.02] transition-transform">
-                    Zum Konfigurator
+                    {t('contactToConfigurator')}
                   </Button>
                 </div>
 
                 <div className="pt-6 border-t border-border">
                   <div className="flex items-center gap-2 text-xs md:text-sm text-muted-foreground">
                     <div className="w-2 h-2 rounded-full bg-primary animate-pulse flex-shrink-0" />
-                    <span>GDPR-konform | Made in Austria 🇦🇹</span>
+                    <span>{t('serviceGDPRCompliant')} | {t('contactMadeInAustria')} 🇦🇹</span>
                   </div>
                 </div>
               </div>
