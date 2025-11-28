@@ -1,76 +1,62 @@
-# ⚠️ INSTRUÇÕES IMPORTANTES - Admin Master
+# ⚠️ INSTRUÇÕES - Criar Administrador
 
-## Primeiro Acesso do Administrador
+## Como Criar um Administrador
 
-Para ativar o admin master, siga **EXATAMENTE** estes passos:
+Siga estes passos para criar sua conta de administrador:
 
-### Passo 1: Criar a Conta
+### Passo 1: Criar Sua Conta
 
-1. Acesse: `https://seudominio.com/auth`
+1. Acesse: `/auth` no seu site
 2. Clique na aba **"Sign Up"** (Registrieren / Criar Conta)
-3. Preencha:
-   - **Nome Completo**: Admin PC Praxis (ou seu nome)
-   - **Email**: `f.rodrigoalves12@gmail.com`
-   - **Senha**: `139702`
-4. Clique em **"Sign Up"** (Registrieren / Criar Conta)
-5. A conta será criada automaticamente (email confirmation está desabilitado)
+3. Preencha com **SEU email e senha**:
+   - **Nome Completo**: Seu nome
+   - **Email**: seu-email@exemplo.com
+   - **Senha**: sua-senha-segura
+4. Clique em **"Sign Up"**
+5. A conta será criada imediatamente (confirmação de email está desabilitada)
 
-### Passo 2: Tornar Admin
+### Passo 2: Tornar-se Admin
 
-Após criar a conta, você precisa executar um comando SQL no banco de dados para se tornar administrador:
+Após criar a conta, execute este comando SQL no banco de dados:
 
 1. **Acesse o Backend**:
-   - Clique no botão "Cloud" ou "Backend" no projeto Lovable
+   - No projeto Lovable, clique em "Cloud" ou "Backend"
    - Vá para **Database → SQL Editor**
 
-2. **Execute este comando**:
-```sql
--- Buscar o ID do usuário
-SELECT id FROM profiles WHERE email = 'f.rodrigoalves12@gmail.com';
+2. **Execute este comando** (substitua o email pelo que você usou no cadastro):
 
--- COPIE O ID RETORNADO e substitua abaixo:
-INSERT INTO user_roles (user_id, role) 
-VALUES ('COLE_O_ID_AQUI', 'admin');
+```sql
+-- Tornar usuário admin automaticamente
+INSERT INTO user_roles (user_id, role)
+SELECT id, 'admin'::app_role
+FROM profiles
+WHERE email = 'seu-email@exemplo.com'
+ON CONFLICT (user_id, role) DO NOTHING;
 ```
 
 **Exemplo prático**:
 ```sql
--- Se o SELECT retornou: 123e4567-e89b-12d3-a456-426614174000
--- Execute:
-INSERT INTO user_roles (user_id, role) 
-VALUES ('123e4567-e89b-12d3-a456-426614174000', 'admin');
+-- Se você se cadastrou com: admin@pcpraxis.com
+INSERT INTO user_roles (user_id, role)
+SELECT id, 'admin'::app_role
+FROM profiles
+WHERE email = 'admin@pcpraxis.com'
+ON CONFLICT (user_id, role) DO NOTHING;
 ```
 
 ### Passo 3: Fazer Login
 
 1. Faça logout (se ainda estiver logado)
-2. Acesse: `https://seudominio.com/auth`
+2. Acesse: `/auth`
 3. Na aba **"Sign In"** (Anmelden / Login):
-   - **Email**: `f.rodrigoalves12@gmail.com`
-   - **Senha**: `139702`
+   - **Email**: o email que você cadastrou
+   - **Senha**: a senha que você definiu
 4. Após o login, você verá o botão **"Admin Panel"** no menu
-5. Clique para acessar o painel administrativo
+5. Clique para acessar o painel administrativo em `/sistema`
 
 ---
 
-## Alternativa: Executar SQL Direto
-
-Se preferir fazer tudo de uma vez, pode executar este SQL após criar a conta via signup:
-
-```sql
--- Tornar o usuário admin (execute DEPOIS de criar a conta em /auth)
-INSERT INTO user_roles (user_id, role)
-SELECT id, 'admin'::app_role
-FROM profiles
-WHERE email = 'f.rodrigoalves12@gmail.com'
-ON CONFLICT (user_id, role) DO NOTHING;
-```
-
-Este comando busca automaticamente o ID do usuário pelo email e insere a role de admin.
-
----
-
-## Verificar se está Admin
+## Verificar se é Admin
 
 Para confirmar que você é admin, execute:
 
@@ -81,11 +67,11 @@ SELECT
   ur.role
 FROM profiles p
 LEFT JOIN user_roles ur ON p.id = ur.user_id
-WHERE p.email = 'f.rodrigoalves12@gmail.com';
+WHERE p.email = 'seu-email@exemplo.com';
 ```
 
 Deve retornar:
-- **email**: f.rodrigoalves12@gmail.com
+- **email**: seu email
 - **full_name**: seu nome
 - **role**: admin
 
@@ -96,27 +82,37 @@ Deve retornar:
 ### "Não vejo o botão Admin Panel"
 - Verifique se executou o SQL para adicionar a role de admin
 - Faça logout e login novamente
-- Verifique se o email está correto
+- Limpe o cache do navegador
 
 ### "Erro ao executar SQL"
 - Certifique-se de que criou a conta primeiro via `/auth`
-- Verifique se copiou o ID corretamente (deve ter formato UUID)
+- Verifique se o email no SQL está correto (o mesmo que usou no cadastro)
 
 ### "Não consigo fazer login"
-- Verifique se o email está correto: `f.rodrigoalves12@gmail.com`
-- Verifique se a senha está correta: `139702`
-- Tente resetar a senha se necessário
+- Verifique se o email está correto
+- Verifique se a senha está correta
+- Tente criar uma nova conta se necessário
+
+### "User already registered"
+- Se você já criou a conta mas esqueceu a senha, você pode:
+  1. Criar uma nova conta com outro email, OU
+  2. Usar a função de reset de senha (se implementada), OU
+  3. Excluir o usuário antigo do banco e criar novamente
 
 ---
 
-## Após Configurar
+## Criar Outros Admins
 
-Depois de configurar o admin master, você pode:
-- ✅ Acessar o painel admin em `/sistema`
-- ✅ Gerenciar produtos
-- ✅ Ver e processar pedidos
-- ✅ Criar outros admins usando o mesmo processo
+Depois de configurar seu primeiro admin, você pode criar outros admins seguindo o mesmo processo:
+1. Peça para a pessoa criar conta via `/auth`
+2. Execute o SQL acima com o email dela
+3. Ela faz logout e login novamente
 
 ---
 
-**IMPORTANTE**: Guarde estas credenciais em local seguro e considere alterar a senha após o primeiro acesso.
+## Segurança
+
+- ✅ Use senhas fortes para contas admin
+- ✅ Não compartilhe credenciais de admin
+- ✅ Mantenha o acesso ao SQL Editor restrito
+- ✅ Considere implementar autenticação de dois fatores no futuro
