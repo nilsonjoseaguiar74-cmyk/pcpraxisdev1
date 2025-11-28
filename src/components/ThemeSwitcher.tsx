@@ -36,20 +36,20 @@ export const ThemeSwitcher = () => {
   };
 
   return (
-    <div className="flex items-center gap-1 p-1 rounded-lg bg-card/50 border border-border backdrop-blur-sm">
+    <div className="flex items-center gap-0.5 opacity-60 hover:opacity-100 transition-opacity duration-300">
       {themes.map(({ id, icon: Icon, label }) => (
         <button
           key={id}
           onClick={() => handleThemeClick(id)}
-          className={`p-1.5 rounded transition-all ${
+          className={`p-1 rounded transition-all duration-200 ${
             theme === id
-              ? 'bg-primary text-primary-foreground'
-              : 'text-muted-foreground hover:text-foreground hover:bg-card'
+              ? 'text-primary scale-110'
+              : 'text-muted-foreground/50 hover:text-foreground/80 hover:scale-105'
           }`}
           title={label}
           disabled={isXRayActive}
         >
-          <Icon className={`w-4 h-4 ${id === 'cyberpunk' && theme === id ? 'animate-pulse' : ''}`} />
+          <Icon className={`w-3.5 h-3.5 ${id === 'cyberpunk' && theme === id ? 'animate-pulse' : ''}`} strokeWidth={1.5} />
         </button>
       ))}
     </div>
