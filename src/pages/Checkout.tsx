@@ -48,14 +48,14 @@ export default function Checkout() {
           <Card className="max-w-md w-full text-center">
             <CardHeader>
               <ShoppingCart className="h-16 w-16 mx-auto text-muted-foreground mb-4" />
-              <CardTitle>Carrinho Vazio</CardTitle>
+              <CardTitle>{t('checkoutEmptyCart')}</CardTitle>
               <CardDescription>
-                Adicione produtos ao carrinho para fazer um pedido
+                {t('checkoutEmptyDescription')}
               </CardDescription>
             </CardHeader>
             <CardContent>
               <Button onClick={() => navigate('/shop')} className="w-full">
-                Ir para Shop
+                {t('checkoutGoToShop')}
               </Button>
             </CardContent>
           </Card>
@@ -70,8 +70,8 @@ export default function Checkout() {
     
     if (!shippingData.fullName || !shippingData.address || !shippingData.city || !shippingData.postalCode) {
       toast({
-        title: 'Erro',
-        description: 'Por favor, preencha todos os campos obrigatórios',
+        title: t('checkoutError'),
+        description: t('checkoutErrorFields'),
         variant: 'destructive',
       });
       return;
@@ -112,8 +112,8 @@ export default function Checkout() {
       if (itemsError) throw itemsError;
 
       toast({
-        title: 'Pedido realizado com sucesso!',
-        description: `Número do pedido: ${order.id.slice(0, 8)}`,
+        title: t('checkoutSuccess'),
+        description: `${t('checkoutSuccessDescription')} ${order.id.slice(0, 8)}`,
       });
 
       clearCart();
@@ -121,7 +121,7 @@ export default function Checkout() {
     } catch (error: any) {
       console.error('Error creating order:', error);
       toast({
-        title: 'Erro ao processar pedido',
+        title: t('checkoutError'),
         description: error.message,
         variant: 'destructive',
       });
@@ -148,7 +148,7 @@ export default function Checkout() {
           className="mb-6 gap-2"
         >
           <ArrowLeft className="h-4 w-4" />
-          Voltar ao Shop
+          {t('checkoutBackToShop')}
         </Button>
 
         <div className="grid lg:grid-cols-3 gap-8">
@@ -156,16 +156,16 @@ export default function Checkout() {
           <div className="lg:col-span-2 space-y-6">
             <Card>
               <CardHeader>
-                <CardTitle>Informações de Envio</CardTitle>
+                <CardTitle>{t('checkoutShippingInfo')}</CardTitle>
                 <CardDescription>
-                  Preencha os dados para entrega
+                  {t('checkoutShippingDescription')}
                 </CardDescription>
               </CardHeader>
               <CardContent>
                 <form onSubmit={handleSubmit} className="space-y-4">
                   <div className="grid grid-cols-2 gap-4">
                     <div className="col-span-2 space-y-2">
-                      <Label htmlFor="fullName">Nome Completo *</Label>
+                      <Label htmlFor="fullName">{t('checkoutFullName')} *</Label>
                       <Input
                         id="fullName"
                         value={shippingData.fullName}
@@ -177,7 +177,7 @@ export default function Checkout() {
                     </div>
 
                     <div className="col-span-2 space-y-2">
-                      <Label htmlFor="address">Endereço *</Label>
+                      <Label htmlFor="address">{t('checkoutAddress')} *</Label>
                       <Input
                         id="address"
                         value={shippingData.address}
@@ -189,7 +189,7 @@ export default function Checkout() {
                     </div>
 
                     <div className="space-y-2">
-                      <Label htmlFor="city">Cidade *</Label>
+                      <Label htmlFor="city">{t('checkoutCity')} *</Label>
                       <Input
                         id="city"
                         value={shippingData.city}
@@ -201,7 +201,7 @@ export default function Checkout() {
                     </div>
 
                     <div className="space-y-2">
-                      <Label htmlFor="postalCode">Código Postal *</Label>
+                      <Label htmlFor="postalCode">{t('checkoutPostalCode')} *</Label>
                       <Input
                         id="postalCode"
                         value={shippingData.postalCode}
@@ -213,7 +213,7 @@ export default function Checkout() {
                     </div>
 
                     <div className="space-y-2">
-                      <Label htmlFor="country">País *</Label>
+                      <Label htmlFor="country">{t('checkoutCountry')} *</Label>
                       <Input
                         id="country"
                         value={shippingData.country}
@@ -225,7 +225,7 @@ export default function Checkout() {
                     </div>
 
                     <div className="space-y-2">
-                      <Label htmlFor="phone">Telefone</Label>
+                      <Label htmlFor="phone">{t('checkoutPhone')}</Label>
                       <Input
                         id="phone"
                         type="tel"
@@ -238,13 +238,13 @@ export default function Checkout() {
                   </div>
 
                   <div className="space-y-2">
-                    <Label htmlFor="notes">Observações</Label>
+                    <Label htmlFor="notes">{t('checkoutNotes')}</Label>
                     <Textarea
                       id="notes"
                       value={notes}
                       onChange={(e) => setNotes(e.target.value)}
                       rows={3}
-                      placeholder="Informações adicionais sobre o pedido..."
+                      placeholder={t('checkoutNotesPlaceholder')}
                     />
                   </div>
                 </form>
@@ -253,9 +253,9 @@ export default function Checkout() {
 
             <Card>
               <CardHeader>
-                <CardTitle>Método de Pagamento</CardTitle>
+                <CardTitle>{t('checkoutPaymentMethod')}</CardTitle>
                 <CardDescription>
-                  Selecione como deseja pagar
+                  {t('checkoutPaymentDescription')}
                 </CardDescription>
               </CardHeader>
               <CardContent>
@@ -264,7 +264,7 @@ export default function Checkout() {
                     <RadioGroupItem value="credit_card" id="credit_card" />
                     <Label htmlFor="credit_card" className="flex items-center gap-2 cursor-pointer flex-1">
                       <CreditCard className="h-5 w-5" />
-                      Cartão de Crédito
+                      {t('checkoutCreditCard')}
                     </Label>
                   </div>
                   
@@ -272,7 +272,7 @@ export default function Checkout() {
                     <RadioGroupItem value="bank_transfer" id="bank_transfer" />
                     <Label htmlFor="bank_transfer" className="flex items-center gap-2 cursor-pointer flex-1">
                       <Wallet className="h-5 w-5" />
-                      Transferência Bancária
+                      {t('checkoutBankTransfer')}
                     </Label>
                   </div>
                   
@@ -280,7 +280,7 @@ export default function Checkout() {
                     <RadioGroupItem value="crypto" id="crypto" />
                     <Label htmlFor="crypto" className="flex items-center gap-2 cursor-pointer flex-1">
                       <Bitcoin className="h-5 w-5" />
-                      Criptomoeda
+                      {t('checkoutCrypto')}
                     </Label>
                   </div>
                 </RadioGroup>
@@ -292,7 +292,7 @@ export default function Checkout() {
           <div className="lg:col-span-1">
             <Card className="sticky top-24">
               <CardHeader>
-                <CardTitle>Resumo do Pedido</CardTitle>
+                <CardTitle>{t('checkoutOrderSummary')}</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="space-y-3">
@@ -315,19 +315,19 @@ export default function Checkout() {
 
                 <div className="space-y-2">
                   <div className="flex justify-between text-sm">
-                    <span className="text-muted-foreground">Subtotal</span>
+                    <span className="text-muted-foreground">{t('checkoutSubtotal')}</span>
                     <span>{formatPrice(totalPrice)}</span>
                   </div>
                   <div className="flex justify-between text-sm">
-                    <span className="text-muted-foreground">Envio</span>
-                    <span className="text-green-600">Grátis</span>
+                    <span className="text-muted-foreground">{t('cartShipping')}</span>
+                    <span className="text-green-600">{t('checkoutShippingFree')}</span>
                   </div>
                 </div>
 
                 <Separator />
 
                 <div className="flex justify-between text-lg font-bold">
-                  <span>Total</span>
+                  <span>{t('checkoutTotal')}</span>
                   <span>{formatPrice(totalPrice)}</span>
                 </div>
 
@@ -337,11 +337,11 @@ export default function Checkout() {
                   className="w-full"
                   size="lg"
                 >
-                  {loading ? 'Processando...' : 'Finalizar Pedido'}
+                  {loading ? t('checkoutProcessing') : t('checkoutComplete')}
                 </Button>
 
                 <p className="text-xs text-muted-foreground text-center">
-                  Ao finalizar, você concorda com nossos termos e condições
+                  {t('checkoutTerms')}
                 </p>
               </CardContent>
             </Card>

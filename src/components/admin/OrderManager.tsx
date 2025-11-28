@@ -5,6 +5,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@
 import { Badge } from '@/components/ui/badge';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { toast } from 'sonner';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 interface Order {
   id: string;
@@ -20,6 +21,7 @@ interface Order {
 }
 
 export const OrderManager = () => {
+  const { t } = useLanguage();
   const [orders, setOrders] = useState<Order[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -57,7 +59,7 @@ export const OrderManager = () => {
       }
     } catch (error) {
       console.error('Error fetching orders:', error);
-      toast.error('Erro ao carregar pedidos');
+      toast.error(t('checkoutError'));
     } finally {
       setLoading(false);
     }
@@ -71,11 +73,11 @@ export const OrderManager = () => {
         .eq('id', orderId);
 
       if (error) throw error;
-      toast.success('Status atualizado com sucesso!');
+      toast.success(t('adminOrderUpdated'));
       fetchOrders();
     } catch (error: any) {
       console.error('Error updating status:', error);
-      toast.error(error.message || 'Erro ao atualizar status');
+      toast.error(error.message || t('adminOrderUpdateError'));
     }
   };
 
@@ -97,46 +99,46 @@ export const OrderManager = () => {
   const getStatusLabel = (status: string) => {
     switch (status) {
       case 'pending':
-        return 'Pendente';
+        return t('adminOrderStatusPending');
       case 'processing':
-        return 'Processando';
+        return t('adminOrderStatusProcessing');
       case 'completed':
-        return 'Completo';
+        return t('adminOrderStatusCompleted');
       case 'cancelled':
-        return 'Cancelado';
+        return t('adminOrderStatusCancelled');
       default:
         return status;
     }
   };
 
   if (loading) {
-    return <div className="text-center py-8">Carregando pedidos...</div>;
+    return <div className="text-center py-8">{t('adminLoadingOrders')}</div>;
   }
 
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Gestão de Pedidos</CardTitle>
-        <CardDescription>Visualize e gerencie todos os pedidos dos clientes</CardDescription>
+        <CardTitle>{t('adminOrders')}</CardTitle>
+        <CardDescription>{t('adminOrdersDescription')}</CardDescription>
       </CardHeader>
       <CardContent>
         <div className="rounded-md border">
           <Table>
             <TableHeader>
               <TableRow>
-                <TableHead>Cliente</TableHead>
-                <TableHead>Email</TableHead>
-                <TableHead>Valor Total</TableHead>
-                <TableHead>Status</TableHead>
-                <TableHead>Data</TableHead>
-                <TableHead>Alterar Status</TableHead>
+                <TableHead>{t('adminCustomer')}</TableHead>
+                <TableHead>{t('adminEmail')}</TableHead>
+                <TableHead>{t('adminTotalAmount')}</TableHead>
+                <TableHead>{t('adminStatus')}</TableHead>
+                <TableHead>{t('adminDate')}</TableHead>
+                <TableHead>{t('adminChangeStatus')}</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
               {orders.length === 0 ? (
                 <TableRow>
                   <TableCell colSpan={6} className="text-center text-muted-foreground">
-                    Nenhum pedido encontrado
+                    {t('adminNoOrders')}
                   </TableCell>
                 </TableRow>
               ) : (
@@ -164,10 +166,10 @@ export const OrderManager = () => {
                           <SelectValue />
                         </SelectTrigger>
                         <SelectContent>
-                          <SelectItem value="pending">Pendente</SelectItem>
-                          <SelectItem value="processing">Processando</SelectItem>
-                          <SelectItem value="completed">Completo</SelectItem>
-                          <SelectItem value="cancelled">Cancelado</SelectItem>
+                          <SelectItem value="pending">{t('adminOrderStatusPending')}</SelectItem>
+                          <SelectItem value="processing">{t('adminOrderStatusProcessing')}</SelectItem>
+                          <SelectItem value="completed">{t('adminOrderStatusCompleted')}</SelectItem>
+                          <SelectItem value="cancelled">{t('adminOrderStatusCancelled')}</SelectItem>
                         </SelectContent>
                       </Select>
                     </TableCell>
