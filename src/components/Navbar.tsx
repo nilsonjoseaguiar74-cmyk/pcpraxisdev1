@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Menu, X, LogIn, LogOut, User, ShoppingCart } from "lucide-react";
 import { ThemeSwitcher } from "./ThemeSwitcher";
+import { LanguageSwitcher } from "./LanguageSwitcher";
 import { useTheme } from "@/contexts/ThemeContext";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useAuth } from "@/contexts/AuthContext";
@@ -67,28 +68,30 @@ export const Navbar = () => {
             </Button>
             
             <ThemeSwitcher />
+            <LanguageSwitcher />
+            {isAdmin && (
+              <Button 
+                variant="ghost" 
+                size="sm"
+                onClick={() => navigate('/sistema')}
+                className="hover:scale-105 transition-transform"
+              >
+                {t('adminPanel')}
+              </Button>
+            )}
+            <Button variant="hero" size="sm" className="hover:scale-105 transition-transform">
+              {t('configurePC')}
+            </Button>
             {user ? (
-              <div className="flex items-center gap-2">
-                {isAdmin && (
-                  <Button 
-                    variant="ghost" 
-                    size="sm"
-                    onClick={() => navigate('/sistema')}
-                    className="hover:scale-105 transition-transform"
-                  >
-                    {t('adminPanel')}
-                  </Button>
-                )}
-                <Button 
-                  variant="outline" 
-                  size="sm" 
-                  onClick={() => signOut()}
-                  className="hover:scale-105 transition-transform"
-                >
-                  <LogOut className="w-4 h-4 mr-2" />
-                  {t('logout')}
-                </Button>
-              </div>
+              <Button 
+                variant="outline" 
+                size="sm" 
+                onClick={() => signOut()}
+                className="hover:scale-105 transition-transform"
+              >
+                <LogOut className="w-4 h-4 mr-2" />
+                {t('logout')}
+              </Button>
             ) : (
               <Button 
                 variant="outline" 
@@ -100,9 +103,6 @@ export const Navbar = () => {
                 {t('login')}
               </Button>
             )}
-            <Button variant="hero" size="sm" className="hover:scale-105 transition-transform">
-              {t('configurePC')}
-            </Button>
           </div>
 
           {/* Mobile menu button */}
@@ -126,7 +126,7 @@ export const Navbar = () => {
               className="w-full justify-center relative"
             >
               <ShoppingCart className="h-5 w-5 mr-2" />
-              Carrinho
+              {t('shopCart')}
               {totalItems > 0 && (
                 <Badge className="ml-2 h-5 w-5 flex items-center justify-center p-0 text-xs">
                   {totalItems}
@@ -136,35 +136,37 @@ export const Navbar = () => {
             
             <div className="flex items-center justify-center gap-4 pt-2">
               <ThemeSwitcher />
+              <LanguageSwitcher />
             </div>
+            {isAdmin && (
+              <Button 
+                variant="ghost" 
+                size="sm" 
+                className="w-full"
+                onClick={() => {
+                  navigate('/sistema');
+                  setIsOpen(false);
+                }}
+              >
+                {t('adminPanel')}
+              </Button>
+            )}
+            <Button variant="hero" size="sm" className="w-full">
+              {t('configurePC')}
+            </Button>
             {user ? (
-              <div className="space-y-2">
-                {isAdmin && (
-                  <Button 
-                    variant="ghost" 
-                    size="sm" 
-                    className="w-full"
-                    onClick={() => {
-                      navigate('/sistema');
-                      setIsOpen(false);
-                    }}
-                  >
-                    {t('adminPanel')}
-                  </Button>
-                )}
-                <Button 
-                  variant="outline" 
-                  size="sm" 
-                  className="w-full"
-                  onClick={() => {
-                    signOut();
-                    setIsOpen(false);
-                  }}
-                >
-                  <LogOut className="w-4 h-4 mr-2" />
-                  {t('logout')}
-                </Button>
-              </div>
+              <Button 
+                variant="outline" 
+                size="sm" 
+                className="w-full"
+                onClick={() => {
+                  signOut();
+                  setIsOpen(false);
+                }}
+              >
+                <LogOut className="w-4 h-4 mr-2" />
+                {t('logout')}
+              </Button>
             ) : (
               <Button 
                 variant="outline" 
@@ -179,9 +181,6 @@ export const Navbar = () => {
                 {t('login')}
               </Button>
             )}
-            <Button variant="hero" size="sm" className="w-full">
-              {t('configurePC')}
-            </Button>
           </div>}
       </div>
     </nav>;
