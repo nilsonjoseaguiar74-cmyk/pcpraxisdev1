@@ -1,7 +1,7 @@
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useState, useEffect } from "react";
 import flagDE from "@/assets/flag-de.svg";
-import flagGB from "@/assets/flag-gb.svg";
+import flagUS from "@/assets/flag-us.svg";
 
 export const FloatingLanguageSwitcher = () => {
   const { language, setLanguage } = useLanguage();
@@ -71,7 +71,7 @@ export const FloatingLanguageSwitcher = () => {
         aria-label="English"
         title="English"
       >
-        <img src={flagGB} alt="EN" className="w-full h-full object-cover" />
+        <img src={flagUS} alt="EN" className="w-full h-full object-cover" />
       </button>
     </div>
   );
