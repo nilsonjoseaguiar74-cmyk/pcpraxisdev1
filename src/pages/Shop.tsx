@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { supabase } from '@/integrations/supabase/client';
 import { useLanguage } from '@/contexts/LanguageContext';
@@ -9,10 +9,11 @@ import { Badge } from '@/components/ui/badge';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { useToast } from '@/hooks/use-toast';
 import { Navbar } from '@/components/Navbar';
 import { Footer } from '@/components/Footer';
-import { Loader2, ShoppingCart, Plus, Minus } from 'lucide-react';
+import { Loader2, ShoppingCart, Plus, Minus, Search, Filter, X } from 'lucide-react';
 
 interface Product {
   id: string;
@@ -31,6 +32,10 @@ export default function Shop() {
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [selectedQuantity, setSelectedQuantity] = useState(1);
   const [loading, setLoading] = useState(true);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState<string>('all');
+  const [selectedPriceRange, setSelectedPriceRange] = useState<string>('all');
+  const [selectedStockFilter, setSelectedStockFilter] = useState<string>('all');
   const { t } = useLanguage();
   const { toast } = useToast();
   const { addItem, totalItems } = useCart();
@@ -67,6 +72,56 @@ export default function Shop() {
     }).format(price);
   };
 
+  // Get unique categories
+  const categories = useMemo(() => {
+    const cats = new Set(products.map(p => p.category).filter(Boolean));
+    return Array.from(cats).sort();
+  }, [products]);
+
+  // Filter products
+  const filteredProducts = useMemo(() => {
+    return products.filter(product => {
+      // Search filter
+      if (searchQuery && !product.name.toLowerCase().includes(searchQuery.toLowerCase()) &&
+          !product.description?.toLowerCase().includes(searchQuery.toLowerCase()) &&
+          !product.part_number.toLowerCase().includes(searchQuery.toLowerCase())) {
+        return false;
+      }
+
+      // Category filter
+      if (selectedCategory !== 'all' && product.category !== selectedCategory) {
+        return false;
+      }
+
+      // Price filter
+      if (selectedPriceRange !== 'all') {
+        const price = product.price;
+        if (selectedPriceRange === 'under100' && price >= 100) return false;
+        if (selectedPriceRange === '100to500' && (price < 100 || price >= 500)) return false;
+        if (selectedPriceRange === '500to1000' && (price < 500 || price >= 1000)) return false;
+        if (selectedPriceRange === 'over1000' && price < 1000) return false;
+      }
+
+      // Stock filter
+      if (selectedStockFilter !== 'all') {
+        if (selectedStockFilter === 'instock' && product.quantity === 0) return false;
+        if (selectedStockFilter === 'outofstock' && product.quantity > 0) return false;
+      }
+
+      return true;
+    });
+  }, [products, searchQuery, selectedCategory, selectedPriceRange, selectedStockFilter]);
+
+  const hasActiveFilters = searchQuery || selectedCategory !== 'all' || 
+                          selectedPriceRange !== 'all' || selectedStockFilter !== 'all';
+
+  const clearFilters = () => {
+    setSearchQuery('');
+    setSelectedCategory('all');
+    setSelectedPriceRange('all');
+    setSelectedStockFilter('all');
+  };
+
   const handleAddToCart = (product: Product) => {
     addItem({
       id: product.id,
@@ -86,7 +141,7 @@ export default function Shop() {
       <Navbar />
       
       <main className="flex-1 container mx-auto px-4 py-24">
-        <div className="flex justify-between items-center mb-12">
+        <div className="flex justify-between items-center mb-8">
           <div className="text-center flex-1 space-y-4">
             <h1 className="text-5xl font-bold bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent">
               {t('shopTitle')}
@@ -102,7 +157,7 @@ export default function Shop() {
             size="lg"
           >
             <ShoppingCart className="mr-2 h-5 w-5" />
-            Carrinho
+            {t('shopCart')}
             {totalItems > 0 && (
               <Badge className="absolute -top-2 -right-2 h-6 w-6 flex items-center justify-center p-0">
                 {totalItems}
@@ -111,13 +166,93 @@ export default function Shop() {
           </Button>
         </div>
 
+        {/* Filters Section */}
+        <Card className="p-6 mb-8">
+          <div className="space-y-4">
+            <div className="flex items-center gap-2 mb-4">
+              <Filter className="h-5 w-5 text-primary" />
+              <h2 className="text-lg font-semibold">{t('shopFiltersTitle')}</h2>
+              {hasActiveFilters && (
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={clearFilters}
+                  className="ml-auto"
+                >
+                  <X className="h-4 w-4 mr-2" />
+                  {t('shopClearFilters')}
+                </Button>
+              )}
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+              {/* Search */}
+              <div className="relative">
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                <Input
+                  placeholder={t('shopSearchPlaceholder')}
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="pl-10"
+                />
+              </div>
+
+              {/* Category Filter */}
+              <Select value={selectedCategory} onValueChange={setSelectedCategory}>
+                <SelectTrigger>
+                  <SelectValue placeholder={t('shopFilterByCategory')} />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="all">{t('shopAllCategories')}</SelectItem>
+                  {categories.map((category) => (
+                    <SelectItem key={category} value={category || ''}>
+                      {category}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+
+              {/* Price Filter */}
+              <Select value={selectedPriceRange} onValueChange={setSelectedPriceRange}>
+                <SelectTrigger>
+                  <SelectValue placeholder={t('shopFilterByPrice')} />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="all">{t('shopAllPrices')}</SelectItem>
+                  <SelectItem value="under100">{t('shopPriceUnder100')}</SelectItem>
+                  <SelectItem value="100to500">{t('shopPrice100to500')}</SelectItem>
+                  <SelectItem value="500to1000">{t('shopPrice500to1000')}</SelectItem>
+                  <SelectItem value="over1000">{t('shopPriceOver1000')}</SelectItem>
+                </SelectContent>
+              </Select>
+
+              {/* Stock Filter */}
+              <Select value={selectedStockFilter} onValueChange={setSelectedStockFilter}>
+                <SelectTrigger>
+                  <SelectValue placeholder={t('shopFilterByStock')} />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="all">{t('shopAllStock')}</SelectItem>
+                  <SelectItem value="instock">{t('shopInStockOnly')}</SelectItem>
+                  <SelectItem value="outofstock">{t('shopOutOfStockOnly')}</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+
+            {/* Results count */}
+            <div className="text-sm text-muted-foreground">
+              {filteredProducts.length} {t('shopProductsFound')}
+            </div>
+          </div>
+        </Card>
+
         {loading ? (
           <div className="flex justify-center items-center min-h-[400px]">
             <Loader2 className="h-8 w-8 animate-spin text-primary" />
           </div>
-        ) : (
+        ) : filteredProducts.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {products.map((product) => (
+            {filteredProducts.map((product) => (
               <Card key={product.id} className="overflow-hidden group hover:shadow-lg transition-shadow">
                 {product.image_url && (
                   <div className="aspect-video overflow-hidden bg-muted">
@@ -168,11 +303,16 @@ export default function Shop() {
               </Card>
             ))}
           </div>
-        )}
-
-        {!loading && products.length === 0 && (
+        ) : (
           <div className="text-center py-12">
-            <p className="text-muted-foreground">Keine Produkte verfügbar</p>
+            <p className="text-muted-foreground text-lg mb-2">
+              {hasActiveFilters ? t('shopNoResults') : t('shopNoProducts')}
+            </p>
+            {hasActiveFilters && (
+              <Button variant="outline" onClick={clearFilters} className="mt-4">
+                {t('shopClearFilters')}
+              </Button>
+            )}
           </div>
         )}
       </main>
@@ -205,7 +345,7 @@ export default function Shop() {
                 <div>
                   <h3 className="font-semibold mb-2">{t('adminDescription')}</h3>
                   <p className="text-muted-foreground">
-                    {selectedProduct.description || 'Keine Beschreibung verfügbar'}
+                    {selectedProduct.description || t('shopNoDescription')}
                   </p>
                 </div>
 
@@ -250,7 +390,7 @@ export default function Shop() {
               {selectedProduct.quantity > 0 ? (
                 <div className="space-y-4">
                   <div className="flex items-center gap-4">
-                    <Label className="text-base font-semibold">Quantidade:</Label>
+                    <Label className="text-base font-semibold">{t('shopQuantity')}:</Label>
                     <div className="flex items-center gap-2">
                       <Button
                         variant="outline"
@@ -279,7 +419,7 @@ export default function Shop() {
                       </Button>
                     </div>
                     <span className="text-sm text-muted-foreground">
-                      (máx: {selectedProduct.quantity})
+                      ({t('shopMaxQuantity')}: {selectedProduct.quantity})
                     </span>
                   </div>
 
