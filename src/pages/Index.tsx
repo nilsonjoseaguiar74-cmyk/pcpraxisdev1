@@ -6,6 +6,7 @@ import { Contact } from "@/components/Contact";
 import { Footer } from "@/components/Footer";
 import { ScrollProgress } from "@/components/ScrollProgress";
 import { CyberpunkEffects } from "@/components/CyberpunkEffects";
+import { FloatingLanguageSwitcher } from "@/components/FloatingLanguageSwitcher";
 
 const Index = () => {
   return (
@@ -13,6 +14,7 @@ const Index = () => {
       <CyberpunkEffects />
       <Navbar />
       <ScrollProgress />
+      <FloatingLanguageSwitcher />
       <main>
         <Hero />
         <Services />
