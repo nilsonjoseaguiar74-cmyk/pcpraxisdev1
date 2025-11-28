@@ -36,6 +36,7 @@ export default function Shop() {
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [selectedPriceRange, setSelectedPriceRange] = useState<string>('all');
   const [selectedStockFilter, setSelectedStockFilter] = useState<string>('all');
+  const [sortBy, setSortBy] = useState<string>('newest');
   const { t } = useLanguage();
   const { toast } = useToast();
   const { addItem, totalItems } = useCart();
@@ -78,9 +79,9 @@ export default function Shop() {
     return Array.from(cats).sort();
   }, [products]);
 
-  // Filter products
+  // Filter and sort products
   const filteredProducts = useMemo(() => {
-    return products.filter(product => {
+    let filtered = products.filter(product => {
       // Search filter
       if (searchQuery && !product.name.toLowerCase().includes(searchQuery.toLowerCase()) &&
           !product.description?.toLowerCase().includes(searchQuery.toLowerCase()) &&
@@ -110,16 +111,36 @@ export default function Shop() {
 
       return true;
     });
-  }, [products, searchQuery, selectedCategory, selectedPriceRange, selectedStockFilter]);
+
+    // Sort products
+    const sorted = [...filtered].sort((a, b) => {
+      switch (sortBy) {
+        case 'priceAsc':
+          return a.price - b.price;
+        case 'priceDesc':
+          return b.price - a.price;
+        case 'nameAsc':
+          return a.name.localeCompare(b.name);
+        case 'nameDesc':
+          return b.name.localeCompare(a.name);
+        case 'newest':
+        default:
+          return 0; // Mantém ordem original (newest first)
+      }
+    });
+
+    return sorted;
+  }, [products, searchQuery, selectedCategory, selectedPriceRange, selectedStockFilter, sortBy]);
 
   const hasActiveFilters = searchQuery || selectedCategory !== 'all' || 
-                          selectedPriceRange !== 'all' || selectedStockFilter !== 'all';
+                          selectedPriceRange !== 'all' || selectedStockFilter !== 'all' || sortBy !== 'newest';
 
   const clearFilters = () => {
     setSearchQuery('');
     setSelectedCategory('all');
     setSelectedPriceRange('all');
     setSelectedStockFilter('all');
+    setSortBy('newest');
   };
 
   const handleAddToCart = (product: Product) => {
@@ -185,7 +206,7 @@ export default function Shop() {
               )}
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
               {/* Search */}
               <div className="relative">
                 <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
@@ -235,6 +256,20 @@ export default function Shop() {
                   <SelectItem value="all">{t('shopAllStock')}</SelectItem>
                   <SelectItem value="instock">{t('shopInStockOnly')}</SelectItem>
                   <SelectItem value="outofstock">{t('shopOutOfStockOnly')}</SelectItem>
+                </SelectContent>
+              </Select>
+
+              {/* Sort */}
+              <Select value={sortBy} onValueChange={setSortBy}>
+                <SelectTrigger>
+                  <SelectValue placeholder={t('shopSortBy')} />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="newest">{t('shopSortNewest')}</SelectItem>
+                  <SelectItem value="priceAsc">{t('shopSortPriceAsc')}</SelectItem>
+                  <SelectItem value="priceDesc">{t('shopSortPriceDesc')}</SelectItem>
+                  <SelectItem value="nameAsc">{t('shopSortNameAsc')}</SelectItem>
+                  <SelectItem value="nameDesc">{t('shopSortNameDesc')}</SelectItem>
                 </SelectContent>
               </Select>
             </div>

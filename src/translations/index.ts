@@ -77,6 +77,12 @@ export const translations = {
     shopMaxQuantity: 'max',
     shopNoDescription: 'Keine Beschreibung verfügbar',
     shopFiltersTitle: 'Filter & Suche',
+    shopSortBy: 'Sortieren nach',
+    shopSortNewest: 'Neueste zuerst',
+    shopSortPriceAsc: 'Preis aufsteigend',
+    shopSortPriceDesc: 'Preis absteigend',
+    shopSortNameAsc: 'Name A-Z',
+    shopSortNameDesc: 'Name Z-A',
     
     // Cart
     cartTitle: 'Warenkorb',
@@ -287,6 +293,12 @@ export const translations = {
     shopMaxQuantity: 'max',
     shopNoDescription: 'No description available',
     shopFiltersTitle: 'Filters & Search',
+    shopSortBy: 'Sort by',
+    shopSortNewest: 'Newest first',
+    shopSortPriceAsc: 'Price ascending',
+    shopSortPriceDesc: 'Price descending',
+    shopSortNameAsc: 'Name A-Z',
+    shopSortNameDesc: 'Name Z-A',
     
     // Cart
     cartTitle: 'Shopping Cart',
