@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAdmin } from '@/hooks/useAdmin';
+import { useLanguage } from '@/contexts/LanguageContext';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { ProductManager } from '@/components/admin/ProductManager';
 import { OrderManager } from '@/components/admin/OrderManager';
@@ -9,6 +10,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 const AdminPanel = () => {
   const navigate = useNavigate();
   const { isAdmin, loading } = useAdmin();
+  const { t } = useLanguage();
 
   useEffect(() => {
     if (!loading && !isAdmin) {
@@ -33,15 +35,15 @@ const AdminPanel = () => {
       <div className="container mx-auto px-4 max-w-7xl">
         <Card className="mb-8">
           <CardHeader>
-            <CardTitle className="text-3xl">Painel Administrativo</CardTitle>
-            <CardDescription>Gestão de produtos, pedidos e inventário</CardDescription>
+            <CardTitle className="text-3xl">{t('adminPanelTitle')}</CardTitle>
+            <CardDescription>{t('adminPanelDescription')}</CardDescription>
           </CardHeader>
         </Card>
 
         <Tabs defaultValue="products" className="w-full">
           <TabsList className="grid w-full grid-cols-2 mb-8">
-            <TabsTrigger value="products">Produtos</TabsTrigger>
-            <TabsTrigger value="orders">Pedidos</TabsTrigger>
+            <TabsTrigger value="products">{t('adminProducts')}</TabsTrigger>
+            <TabsTrigger value="orders">{t('adminOrders')}</TabsTrigger>
           </TabsList>
 
           <TabsContent value="products">
