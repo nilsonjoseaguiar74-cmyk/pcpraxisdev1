@@ -29,8 +29,8 @@ export const Navbar = () => {
               alt="PC Praxis Logo" 
               className="h-10 md:h-14 w-auto object-contain transition-all duration-300" 
               src={theme === 'white' 
-                ? "/lovable-uploads/logo-pc-praxis-dark.png" 
-                : "/lovable-uploads/logo-pc-praxis-light.png"
+                ? "/lovable-uploads/logo-black.svg" 
+                : "/lovable-uploads/logo-white.svg"
               }
             />
           </a>
