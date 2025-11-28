@@ -22,6 +22,9 @@ export const Navbar = () => {
     label: t('configurator'),
     href: "#configurator"
   }, {
+    label: t('shop'),
+    href: "/shop"
+  }, {
     label: t('contact'),
     href: "#contact"
   }];
@@ -55,7 +58,7 @@ export const Navbar = () => {
                     onClick={() => navigate('/sistema')}
                     className="hover:scale-105 transition-transform"
                   >
-                    Painel
+                    {t('adminPanel')}
                   </Button>
                 )}
                 <Button 
@@ -65,7 +68,7 @@ export const Navbar = () => {
                   className="hover:scale-105 transition-transform"
                 >
                   <LogOut className="w-4 h-4 mr-2" />
-                  Sair
+                  {t('logout')}
                 </Button>
               </div>
             ) : (
@@ -76,7 +79,7 @@ export const Navbar = () => {
                 className="hover:scale-105 transition-transform"
               >
                 <LogIn className="w-4 h-4 mr-2" />
-                Entrar
+                {t('login')}
               </Button>
             )}
             <Button variant="hero" size="sm" className="hover:scale-105 transition-transform">
@@ -110,7 +113,7 @@ export const Navbar = () => {
                       setIsOpen(false);
                     }}
                   >
-                    Painel
+                    {t('adminPanel')}
                   </Button>
                 )}
                 <Button 
@@ -123,7 +126,7 @@ export const Navbar = () => {
                   }}
                 >
                   <LogOut className="w-4 h-4 mr-2" />
-                  Sair
+                  {t('logout')}
                 </Button>
               </div>
             ) : (
@@ -137,7 +140,7 @@ export const Navbar = () => {
                 }}
               >
                 <LogIn className="w-4 h-4 mr-2" />
-                Entrar
+                {t('login')}
               </Button>
             )}
             <Button variant="hero" size="sm" className="w-full">
