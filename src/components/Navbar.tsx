@@ -5,12 +5,14 @@ import { ThemeSwitcher } from "./ThemeSwitcher";
 import { useTheme } from "@/contexts/ThemeContext";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useAuth } from "@/contexts/AuthContext";
+import { useAdmin } from "@/hooks/useAdmin";
 import { useNavigate } from "react-router-dom";
 
 export const Navbar = () => {
   const { theme } = useTheme();
   const { t } = useLanguage();
   const { user, signOut } = useAuth();
+  const { isAdmin } = useAdmin();
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
   const menuItems = [{
@@ -45,7 +47,17 @@ export const Navbar = () => {
               </a>)}
             <ThemeSwitcher />
             {user ? (
-              <>
+              <div className="flex items-center gap-2">
+                {isAdmin && (
+                  <Button 
+                    variant="ghost" 
+                    size="sm"
+                    onClick={() => navigate('/sistema')}
+                    className="hover:scale-105 transition-transform"
+                  >
+                    Painel
+                  </Button>
+                )}
                 <Button 
                   variant="outline" 
                   size="sm" 
@@ -55,7 +67,7 @@ export const Navbar = () => {
                   <LogOut className="w-4 h-4 mr-2" />
                   Sair
                 </Button>
-              </>
+              </div>
             ) : (
               <Button 
                 variant="outline" 
@@ -87,18 +99,33 @@ export const Navbar = () => {
               <ThemeSwitcher />
             </div>
             {user ? (
-              <Button 
-                variant="outline" 
-                size="sm" 
-                className="w-full"
-                onClick={() => {
-                  signOut();
-                  setIsOpen(false);
-                }}
-              >
-                <LogOut className="w-4 h-4 mr-2" />
-                Sair
-              </Button>
+              <div className="space-y-2">
+                {isAdmin && (
+                  <Button 
+                    variant="ghost" 
+                    size="sm" 
+                    className="w-full"
+                    onClick={() => {
+                      navigate('/sistema');
+                      setIsOpen(false);
+                    }}
+                  >
+                    Painel
+                  </Button>
+                )}
+                <Button 
+                  variant="outline" 
+                  size="sm" 
+                  className="w-full"
+                  onClick={() => {
+                    signOut();
+                    setIsOpen(false);
+                  }}
+                >
+                  <LogOut className="w-4 h-4 mr-2" />
+                  Sair
+                </Button>
+              </div>
             ) : (
               <Button 
                 variant="outline" 
