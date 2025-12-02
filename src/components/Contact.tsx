@@ -31,10 +31,10 @@ export const Contact = () => {
                     <div>
                       <h3 className="font-tech font-semibold mb-1 text-sm md:text-base">{t('contactEmail')}</h3>
                       <a 
-                        href="mailto:info@pcpraxis.at" 
+                        href="mailto:Office@pcpraxis.at" 
                         className="text-sm md:text-base text-muted-foreground hover:text-primary transition-colors"
                       >
-                        info@pcpraxis.at
+                        Office@pcpraxis.at
                       </a>
                     </div>
                   </div>
@@ -48,10 +48,10 @@ export const Contact = () => {
                     <div>
                       <h3 className="font-tech font-semibold mb-1 text-sm md:text-base">{t('contactPhone')}</h3>
                       <a 
-                        href="tel:+43123456789" 
+                        href="tel:+436649137760" 
                         className="text-sm md:text-base text-muted-foreground hover:text-primary transition-colors"
                       >
-                        +43 1 234 56 789
+                        +43 664 91 377 60
                       </a>
                     </div>
                   </div>
@@ -82,7 +82,6 @@ export const Contact = () => {
                       <div className="text-muted-foreground space-y-1 text-xs md:text-sm">
                         <p>{t('contactMonFri')}</p>
                         <p>{t('contactSat')}</p>
-                        <p className="text-primary font-medium">{t('contactOnlineSupport')}</p>
                       </div>
                     </div>
                   </div>

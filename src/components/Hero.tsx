@@ -59,8 +59,8 @@ export const Hero = () => {
               <div className="text-xs sm:text-sm text-muted-foreground">{t('heroStatQuality')}</div>
             </div>
             <div className="space-y-2 p-4 rounded-lg hover:bg-card/50 transition-all duration-300 cursor-pointer group">
-              <div className="text-2xl sm:text-3xl md:text-4xl font-tech font-bold text-foreground group-hover:scale-110 transition-transform">24/7</div>
-              <div className="text-xs sm:text-sm text-muted-foreground">{t('heroStatSupport')}</div>
+              <div className="text-2xl sm:text-3xl md:text-4xl font-tech font-bold text-foreground group-hover:scale-110 transition-transform">🇦🇹</div>
+              <div className="text-xs sm:text-sm text-muted-foreground">{t('contactMadeInAustria')}</div>
             </div>
           </div>
         </div>

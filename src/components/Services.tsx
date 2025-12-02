@@ -15,7 +15,7 @@ export const Services = () => {
         t('serviceFeatureGamingPCs'),
         t('serviceFeatureWorkstations'),
         t('serviceFeatureOfficePCs'),
-        t('serviceFeatureServerSystems')
+        t('serviceFeatureCustomBuilds')
       ],
     },
     {
