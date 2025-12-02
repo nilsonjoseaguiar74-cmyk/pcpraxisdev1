@@ -95,7 +95,7 @@ export const Configurator = () => {
               </div>
 
               {/* Features */}
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 md:gap-4 pt-4">
+              <div className="grid grid-cols-3 gap-3 md:gap-4 pt-4">
                 <div className="text-center space-y-1 p-3 rounded-lg hover:bg-background/30 transition-colors group cursor-pointer">
                   <div className="text-xl md:text-2xl font-tech font-bold text-primary group-hover:scale-110 transition-transform">✓</div>
                   <div className="text-xs text-muted-foreground leading-tight">{t('configuratorCompatibilityCheck')}</div>
@@ -103,10 +103,6 @@ export const Configurator = () => {
                 <div className="text-center space-y-1 p-3 rounded-lg hover:bg-background/30 transition-colors group cursor-pointer">
                   <div className="text-xl md:text-2xl font-tech font-bold text-primary group-hover:scale-110 transition-transform">✓</div>
                   <div className="text-xs text-muted-foreground leading-tight">{t('configuratorYearsWarranty')}</div>
-                </div>
-                <div className="text-center space-y-1 p-3 rounded-lg hover:bg-background/30 transition-colors group cursor-pointer">
-                  <div className="text-xl md:text-2xl font-tech font-bold text-primary group-hover:scale-110 transition-transform">✓</div>
-                  <div className="text-xs text-muted-foreground leading-tight">{t('configuratorFreeAssembly')}</div>
                 </div>
                 <div className="text-center space-y-1 p-3 rounded-lg hover:bg-background/30 transition-colors group cursor-pointer">
                   <div className="text-xl md:text-2xl font-tech font-bold text-primary group-hover:scale-110 transition-transform">✓</div>
