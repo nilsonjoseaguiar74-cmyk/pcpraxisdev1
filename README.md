@@ -1,380 +1,210 @@
-✅ Resumo Final
-Criei 5 módulos executáveis completos para seu projeto PC Praxis:
-📦 Módulos Criados
+✅ Zusammenfassung
+Ich habe 5 vollständige, ausführbare Module für Ihr PC Praxis-Projekt erstellt:
+
+📦 Erstellte Module
 
 01-setup-projeto-base.sh
 
-Estrutura de diretórios
+Verzeichnisstruktur
 Docker Compose
-Makefile com comandos úteis
-Git inicializado
+Makefile mit nützlichen Befehlen
+Git initialisiert
 Tag: v0.1-planning
-
 
 02-setup-backend.sh
 
 NestJS + TypeScript
-Prisma ORM com schema completo
-Módulos: Auth, Users, Catalog, Orders, Tickets, Tracking
-Dockerfile multi-stage
+Prisma ORM mit vollständigem Schema
+Module: Auth, Users, Catalog, Orders, Tickets, Tracking
+Mehrstufiges Dockerfile
 Tag: v0.2-backend-core
-
 
 03-setup-frontend.sh
 
 Next.js 14 + React + TypeScript
-TailwindCSS com paleta escura
-API client configurado
-Estrutura de componentes
+Tailwind CSS mit dunkler Farbpalette
+Konfigurierter API-Client
+Komponentenstruktur
 Tag: v0.5-frontend-admin
-
 
 04-deploy-stack.sh
 
-Deploy automático (dev/staging/prod)
-Health checks
-Nginx configurado
-SSL ready
-Tag: v1.0-production-ready
-
+Automatische Bereitstellung (Entwicklung/Staging/Produktion)
+Systemprüfungen
+Nginx konfiguriert
+SSL Bereit
+Tag: v1.0-produktionsbereit
 
 05-github-actions-setup.sh
 
-CI/CD completo
-Testes automáticos
-Deploy automático
-Backup diário
-Security scans
+Vollständige CI/CD
+Automatisierte Tests
+Automatisierte Bereitstellung
+Tägliches Backup
+Sicherheits-Scans
 
-
-
-🎯 Características
-✅ Alemão/Áustria: Preparado para de-AT, EUR
-✅ GDPR Compliant: IP pseudonimizado, consent tracking
-✅ Protocolo de Pedidos: Formato PCP-AAAAMMDD-0001
-✅ Tickets de Manutenção: Formato SRV-AAAAMMDD-0001
-✅ PC Konfigurator: Sistema de componentes com compatibilidade
-✅ Frete & Taxas: Cálculo integrado aos pedidos
-✅ Analytics: Plausible self-hosted, privacy-first
-✅ Ferramentas Gratuitas: Stack 100% open-source
-✅ Pontos de Restauração: Tags Git em cada fase
-🚀 Como Usar
-bash# 1. Setup base
+🎯 Funktionen
+✅ Deutschland/Australien: Bereit für de-AT, EUR
+✅ DSGVO-konform: Pseudonymisierte IP-Adresse, Einwilligungs-Tracking
+✅ Bestellprotokoll: Format PCP-JJJJMMTT-0001
+✅ Wartungstickets: Format SRV-JJJJMMTT-0001
+✅ PC-Konfigurator: Komponentensystem mit Kompatibilitätsprüfung
+✅ Versandkosten: Berechnung in Bestellungen integriert
+✅ Analysen: Plausibles Self-Hosting, Datenschutz an erster Stelle
+✅ Kostenlose Tools: 100 % Open-Source-Stack
+✅ Wiederherstellungspunkte: Git-Tags in jeder Phase
+🚀 Verwendung
+bash# 1. Basiseinrichtung
 bash 01-setup-projeto-base.sh
 
 # 2. Backend
-bash 02-setup-backend.sh
-cd backend && npx prisma migrate dev --name init && cd ..
+bash 02-setup-backend.sh cd backend && npx prisma migrate dev --name init && cd ..
 
 # 3. Frontend
 bash 03-setup-frontend.sh
 
-# 4. Subir tudo
+# 4. Alles bereitstellen
 bash 04-deploy-stack.sh
-# Escolha: 1) Desenvolvimento
+# Auswahl: 1) Entwicklung
 
-# 5. CI/CD (opcional)
+# 5. CI/CD (optional)
 bash 05-github-actions-setup.sh
-📍 Acessos Locais
+
+📍 Lokaler Zugriff
 
 Frontend: http://localhost:3000
 Backend: http://localhost:4000
-API Docs: http://localhost:4000/api/docs
+API-Dokumentation: http://localhost:4000/api/docs
 Plausible: http://localhost:8000
-Database: localhost:5432
+Datenbank: localhost:5432
 
-🏷️ Tags de Restauração
-Cada fase tem uma tag Git para você poder voltar:
-bashgit checkout v0.2-backend-core    # Backend pronto
-git checkout v0.5-frontend-admin  # Interface completa
-git checkout v1.0-production-ready # Prod ready
+🏷️ Tags Wiederherstellung
+Jede Phase hat einen Git-Tag, sodass Sie die vorherige Phase wiederherstellen können: bash git checkout v0.2-backend-core # Backend bereit
+git checkout v0.5-frontend-admin # Vollständige Benutzeroberfläche
+git checkout v1.0-production-ready # Produktionsbereit
 
 # PCPraxis
 
-# PC Praxis Platform
+# PC Praxis Plattform
 
-Plataforma full stack para a empresa **PC Praxis (Pedro Hauser)**, com foco em:
+Vollständige Plattform für das Unternehmen **PC Praxis (Pedro Hauser)** mit folgenden Schwerpunkten:
 
-- Website institucional e comercial;
-- Loja + PC Konfigurator (configurador de PCs);
-- Catálogo de serviços e produtos;
-- Tickets com número de protocolo para:
-  - compras/pedidos;
-  - serviços de manutenção;
-  - frete, entregas e taxas associadas;
-- Backend para autenticação, leads e rastreamento de eventos;
-- Stack baseada em ferramentas gratuitas / open-source.
+- Institutionelle und kommerzielle Website;
+
+- Shop + PC-Konfigurator;
+
+- Service- und Produktkatalog;
+
+- Tickets mit Protokollnummern für:
+
+- Käufe/Bestellungen;
+
+- Wartungsdienste;
+
+- Versand, Lieferungen und zugehörige Gebühren;
+
+- Backend für Authentifizierung, Lead- und Event-Tracking;
+
+- Technologie-Stack basierend auf freien/Open-Source-Tools.
 
 ---
 
-## 1. Stack Tecnológica (gratuita / open-source)
+## 1. Technologie-Stack (frei/Open Source)
 
 ### 1.1. Frontend
 
-- **Next.js + React + TypeScript** – framework full stack gratuito, focado em performance e SEO.
-- **TailwindCSS** – utilitário CSS open-source, leve e flexível.
-- **Radix / Headless UI (opcional)** – componentes acessíveis.
+- **Next.js + React + TypeScript** – Kostenloses Full-Stack-Framework mit Fokus auf Performance und SEO.
+
+- **TailwindCSS** – Leichtgewichtiges und flexibles Open-Source-CSS-Tool.
+
+- **Radix / Headless UI (optional)** – Barrierefreie Komponenten.
 
 ### 1.2. Backend
 
-- **Node.js + NestJS ou Express** – runtime e framework gratuitos e amplamente usados.
-- **TypeScript** – tipagem estática para maior segurança.
-- **Prisma ou TypeORM** – ORM gratuito para Postgres.
+- **Node.js + NestJS oder Express** – Kostenlose und weit verbreitete Laufzeitumgebung und Framework.
 
-### 1.3. Banco de Dados
+- **TypeScript** – Statische Typisierung für höhere Sicherheit.
 
-- **PostgreSQL** – banco relacional open-source, robusto e padrão de mercado.   
+- **Prisma oder TypeORM** – Kostenloses ORM für PostgreSQL.
 
-### 1.4. Observabilidade, Logs e Analytics
+### 1.3. Datenbank
 
-- Logs tratados como **streams de eventos**, conforme 12-Factor App.   
-- Web analytics:
-  - **Plausible CE** (self-hosted) – open-source, leve, focado em privacidade, compatível com GDPR, sem cookies.   
-  - Alternativa: **Matomo** self-hosted (também open-source e GDPR-compliant).   
+- **PostgreSQL** – Robuste, branchenübliche Open-Source-Datenbank.
 
-### 1.5. Infraestrutura & Deploy
+### 1.4. Observability, Logs und Analytics
 
-- **Docker + Docker Compose** – empacotamento de frontend, backend e banco.
-- **Nginx ou Traefik** – reverse proxy e TLS.
-- **GitHub + GitHub Actions** – CI/CD gratuito, com build, testes e deploy automatizado.   
+- Logs werden gemäß den 12-Faktor-App-Prinzipien als **Event-Streams** behandelt.
+
+- Webanalyse:
+
+- **Plausible CE** (selbstgehostet) – Open Source, ressourcenschonend, datenschutzorientiert, DSGVO-konform, ohne Cookies.
+
+- Alternative: **Matomo** (selbstgehostet, ebenfalls Open Source und DSGVO-konform).
+
+### 1.5 Infrastruktur & Bereitstellung
+
+- **Docker + Docker Compose** – Frontend-, Backend- und Datenbankpaketierung.
+
+- **Nginx oder Traefik** – Reverse-Proxy und TLS.
+
+- **GitHub + GitHub Actions** – kostenlose CI/CD mit automatisiertem Build, Test und Deployment.
 
 ---
 
-## 2. Domínios de Negócio
+## 2. Geschäftsbereiche
 
-### 2.1. Catálogo
+### 2.1 Katalog
 
-- **Serviços** (manutenção, montagem, consultoria).
-- **Produtos** (PCs completos, componentes, acessórios).
-- Ligação com:
-  - PC Konfigurator (componentes configuráveis);
-  - Tickets de manutenção (serviços contratados);
-  - Pedidos de compra (produtos vendidos).
+- **Services** (Wartung, Einrichtung, Beratung).
 
-### 2.2. Pedidos e Protocolo de Compra
+- **Produkte** (Komplett-PCs, Komponenten, Zubehör).
 
-Cada compra gera um **Ticket de Pedido** com número de protocolo único (`order_protocol`), usado para:
+- Links zu:
 
-- rastrear status do pedido;
-- referenciar em e-mails, notas fiscais e atendimento.
+- PC-Konfigurator (konfigurierbare Komponenten);
 
-Campos principais do pedido:
+- Wartungstickets (Vertragsleistungen);
+
+- Bestellungen (verkaufte Produkte).
+
+### 2.2. Bestellungen und Protokoll
+
+Für jede Bestellung wird ein **Bestellschein** mit einer eindeutigen Protokollnummer (`order_protocol`) generiert. Dieser dient folgenden Zwecken:
+
+- Nachverfolgung des Bestellstatus;
+
+- Referenzierung von E-Mails, Rechnungen und Kundenservice.
+
+Hauptbestellfelder:
 
 - `order_id` (UUID);
-- `order_protocol` (ex.: `PCP-AAAAMMDD-0001`);
+
+- `order_protocol` (z. B. `PCP-YYYYMMDD-0001`);
+
 - `customer_id` / `visitor_id`;
-- itens (produtos/serviços);
-- valores de frete, taxas, descontos;
-- status (`pending`, `paid`, `in_preparation`, `shipped`, `delivered`, `cancelled`);
-- timestamps de cada etapa.
 
-### 2.3. Tickets de Manutenção / Serviços
+- Artikel (Produkte/Dienstleistungen);
 
-Cada serviço de manutenção abre um **Ticket de Serviço** com protocolo próprio:
+- Versandkosten, Gebühren, Rabatte;
+
+- Status (`pending`, `paid`, `in_preparation`, `shipped`, `delivered`, `crusted`);
+
+- Zeitstempel für jeden Bearbeitungsschritt.
+
+### 2.3. Wartungs-/Servicetickets
+
+Jeder Wartungsservice erstellt ein **Serviceticket** mit eigenem Protokoll:
 
 - `service_ticket_id` (UUID);
-- `service_protocol` (ex.: `SRV-AAAAMMDD-0001`);
-- cliente, equipamento, sintomas, prioridade;
-- vínculo com produtos/serviços do catálogo;
-- status (`opened`, `diagnosing`, `waiting_customer`, `in_repair`, `ready`, `closed`).
 
-### 2.4. Frete, Entrega e Taxas
+- `service_protocol` (z. B. `SRV-YYYYMMDD-0001`);
 
-Tratados como entidades de primeira classe:
+- Kunde, Gerät, Symptome, Priorität;
 
-- **Frete**:
-  - tabela de faixas de CEP/país, peso, transportadora;
-  - regras de cálculo (fixo, por peso, por distância, grátis acima de X).
-- **Entrega**:
-  - tracking de envio (transportadora, código de rastreio, janelas de entrega);
-  - eventos de status (`shipment_created`, `in_transit`, `delivered`).
-- **Taxas**:
-  - impostos (VAT), taxas de serviço, meios de pagamento;
-  - configuráveis via painel admin.
+- Link zu Produkten/Services im Katalog;
 
----
+- Status (`geöffnet`, `Diagnose läuft`, `wartet auf Kunden`, `in Reparatur`, `bereit`, `abgeschlossen`).
 
-## 3. Arquitetura de Módulos
+### 2.4. Versand, Lieferung und Gebühren
 
-### 3.1. Backend (módulos)
-
-- `auth` – registro, login, recuperação de senha.
-- `users` – perfis, dados de contato.
-- `catalog` – produtos, serviços, categorias e componentes de configurador.
-- `orders` – pedidos, protocolos de compra, pagamentos.
-- `service-tickets` – manutenção, protocolos de serviço.
-- `shipping` – fretes, transportadoras, entregas.
-- `fees` – impostos e taxas.
-- `tracking` – visitantes, eventos e consentimentos.
-- `leads` – captação e qualificação de oportunidades.
-
-### 3.2. Frontend (áreas)
-
-- Website público: Home, Sobre, Serviços, Loja, PC Konfigurator, Blog, Contato.
-- Área do cliente (opcional): histórico de pedidos, tickets, dados de entrega.
-- Dashboard admin:
-  - gestão de catálogo;
-  - gestão de pedidos e tickets;
-  - configuração de fretes e taxas;
-  - visão de funil (visitas → configurador → pedido → entrega).
-
----
-
-## 4. Princípios de Projeto (12-Factor App)
-
-O projeto segue os princípios da **12-Factor App**:   
-
-1. **Codebase único**, vários deploys (dev, staging, prod).  
-2. **Dependências declaradas** (package.json) e isoladas.  
-3. **Configuração no ambiente** (`.env`), nunca hardcoded.  
-4. **Backing services** (Postgres, Redis, Plausible) tratados como recursos anexos, acessados por URL.  
-5. **Build / Release / Run separados**, com versões imutáveis e rollback simples.   
-6. **Processos stateless**, com estado em banco/serviços.  
-7. **Port binding** – expõe HTTP diretamente.  
-8. **Dev/prod parity** – dev local espelha produção o máximo possível (via Docker).  
-9. **Logs como streams**, enviados para stdout e agregadores.  
-10. **Admin tasks** (migrations, seeds) rodando como processos pontuais.
-
----
-
-## 5. Roadmap por Fases com Pontos de Restauração
-
-Cada fase termina com um **Ponto de Restauração Estratégico**: um tag Git (`vX.Y`) + estado mínimo do sistema que deve estar estável.
-
-### Fase 0 – Planejamento & Setup
-
-**Objetivo:** alinhar visão, stack e requisitos.
-
-- Definir objetivos de negócio (venda online, serviços, leads).  
-- Mapear domínios (catálogo, pedidos, tickets, frete, tracking).  
-- Configurar repositório Git e convenções de branch.  
-- Especificar esquema inicial de banco.
-
-**Ponto de restauração:**  
-- Tag: `v0.1-planning`  
-- Estado: docs de requisitos + modelos iniciais de ERD no repo (`/docs`).
-
----
-
-### Fase 1 – Base de Backend
-
-**Objetivo:** levantar espinha dorsal da API.
-
-- Criar projeto Node/Nest/Express com TypeScript.  
-- Implementar:
-  - módulos `auth`, `users`;  
-  - conexão com Postgres;  
-  - migrations básicas `users`, `companies`.  
-- Definir infra de config (`.env`), scripts de build e start.
-
-**Ponto de restauração:**  
-- Tag: `v0.2-backend-core`  
-- Estado: API com auth e health check funcionando em Docker local.
-
----
-
-### Fase 2 – Catálogo + Tickets
-
-**Objetivo:** habilitar o coração de negócio.
-
-- Implementar módulos:
-  - `catalog` (produtos, serviços, categorias);  
-  - `configurator` (tipos de componentes, componentes);  
-  - `orders` (pedido + protocolo de compra);  
-  - `service-tickets` (ticket de manutenção com protocolo).  
-- Criar endpoints CRUD protegidos para admin.
-
-**Ponto de restauração:**  
-- Tag: `v0.3-catalog-orders-tickets`  
-- Estado: é possível criar produtos/serviços, abrir pedidos e tickets via API.
-
----
-
-### Fase 3 – Frete, Entrega e Taxas
-
-**Objetivo:** completar fluxo transacional.
-
-- Módulo `shipping`:
-  - tabela de faixas de frete;
-  - endpoint para cálculo de frete;  
-  - tracking básico de entregas.  
-- Módulo `fees`:
-  - configuração de VAT/taxas;
-  - cálculo de totais do pedido (subtotal + frete + taxa).  
-- Integração desses dados em `orders`.
-
-**Ponto de restauração:**  
-- Tag: `v0.4-logistics`  
-- Estado: pedidos retornam valores completos (itens, frete, taxas, total).
-
----
-
-### Fase 4 – Frontend Web & Dashboard Admin
-
-**Objetivo:** expor tudo para usuário final e administradores.
-
-- Website público em Next.js:
-  - páginas Home, Serviços, Loja, PC Konfigurator, Contato.  
-  - consumo da API para catálogo, frete e criação de pedidos.  
-- Dashboard admin:
-  - gestão de catálogo;  
-  - visualização/edição de pedidos e tickets;  
-  - configuração de fretes e taxas.
-
-**Ponto de restauração:**  
-- Tag: `v0.5-frontend-admin`  
-- Estado: fluxo completo manual (admin cadastra, cliente compra, ticket abre).
-
----
-
-### Fase 5 – Tracking, Analytics & Ads
-
-**Objetivo:** dar inteligência ao sistema para follow-up e remarketing.
-
-- Implementar módulo `tracking`:
-  - registro de visitantes (`visitor_id`);  
-  - pseudonimização de IP (hash + salt, sem armazenar IP cru).   
-  - eventos (`page_view`, `configurator_*`, `add_to_cart`, `purchase_completed`).  
-- Integrar com **Plausible** ou **Matomo** self-hosted (script + events).   
-- Expor eventos relevantes via Tag Manager para Google Ads / Meta (se necessário).
-
-**Ponto de restauração:**  
-- Tag: `v0.6-tracking-analytics`  
-- Estado: funil completo visível (visitas → configurador → pedido → entrega).
-
----
-
-### Fase 6 – Empacotamento, Servidor & Deploy
-
-**Objetivo:** ter ambiente de staging/produção estável com rollback simples.
-
-- Escrever `Dockerfile` do backend e frontend (build separado de runtime).   
-- Criar `docker-compose.yml` com:
-  - `frontend`, `backend`, `postgres`, `reverse-proxy`, `analytics` (Plausible/Matomo).  
-- Configurar CI/CD (GitHub Actions):
-  - build + testes a cada push;  
-  - build de imagens e deploy em VPS.  
-- Configurar Nginx/Traefik com TLS e rotas `/` (frontend) e `/api` (backend).
-
-**Ponto de restauração:**  
-- Tag: `v1.0-production-ready`  
-- Estado: ambiente de produção operando, com rollback por tag de imagem/versão.
-
----
-
-## 6. Setup de Desenvolvimento (resumo)
-
-### 6.1. Pré-requisitos
-
-- Node.js LTS  
-- Docker + Docker Compose  
-- Git
-
-### 6.2. Clonar e subir ambiente local
-
-```bash
-git clone https://github.com/SEU_USUARIO/pc-praxis-platform.git
-cd pc-praxis-platform
-
-# subir stack completa (dev)
-docker compose up -d
+Wird wie folgt behandelt:
